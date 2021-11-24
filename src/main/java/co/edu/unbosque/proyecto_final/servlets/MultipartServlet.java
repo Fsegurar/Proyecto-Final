@@ -12,13 +12,13 @@ import javax.servlet.annotation.*;
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class MultipartServlet extends HttpServlet {
-    private ManageFiles database;
+    //private ManageFiles database;
     private String UPLOAD_DIRECTORY = "uploads";
     private int i;
 
     //object initialization
     public void init() {
-        database = new ManageFiles();
+       // database = new ManageFiles();
         i =0;
     }
 
@@ -65,10 +65,9 @@ public class MultipartServlet extends HttpServlet {
         i++;
         String archivo = fileName;
         //adding info to the meta database
-        database.getMeta().add(new MetaData(pet,correo,fecha,archivo));
+        //database.getMeta().add(new MetaData(pet,correo,fecha,archivo));
         String uploadPath2 = getServletContext().getRealPath("/DBfiles/MetaBD");
-        database.setArchivodata(uploadPath2);
-        database.escribirArchivo_meta();
+       // database.setArchivodata(uploadPath2);
         log("hola");
         response.sendRedirect(request.getContextPath() + "/propietario.html");
 

@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(name = "createdservlet", value = "/created-servlet")
-public class CreatedServlet {
+public class CreatedServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //no se que debria responder por que creeo que deberia devilverse al index pero si esta repetido el usuario o las contraseñas no coinciden deberia mostrase el alert en el de creacion

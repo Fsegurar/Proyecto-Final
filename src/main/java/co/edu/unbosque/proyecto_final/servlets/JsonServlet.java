@@ -17,13 +17,13 @@ public class JsonServlet extends HttpServlet {
         response.setContentType("application/json");
 
         // Getting the info from the Database
-        ManageFiles file = new ManageFiles();
+        //ManageFiles file = new ManageFiles();
         String uploadPath = getServletContext().getRealPath("/DBfiles/MetaBD");
-        file.setArchivodata(uploadPath);
+        //file.setArchivodata(uploadPath);
 
         // Adding the data to response, parsing it to json using Gson library
         PrintWriter out = response.getWriter();
-        out.println(new Gson().toJson(file.uploadData_meta()));
+       // out.println(new Gson().toJson(file.uploadData_meta()));
 
     }
 
