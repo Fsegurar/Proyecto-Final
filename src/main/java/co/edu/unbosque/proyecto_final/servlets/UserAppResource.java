@@ -1,14 +1,16 @@
-package edu.unbosque.Taller_5.servlets;
+package co.edu.unbosque.proyecto_final.servlets;
 
 
-import edu.unbosque.Taller_5.services.OfficialService;
-import edu.unbosque.Taller_5.services.OwnerService;
-import edu.unbosque.Taller_5.services.UserAppService;
-import edu.unbosque.Taller_5.services.VetService;
-import edu.unbosque.Taller_5.servlets.pojos.OfficialPOJO;
-import edu.unbosque.Taller_5.servlets.pojos.OwnerPOJO;
-import edu.unbosque.Taller_5.servlets.pojos.UserAppPOJO;
-import edu.unbosque.Taller_5.servlets.pojos.VetPOJO;
+
+
+import co.edu.unbosque.proyecto_final.services.OfficialService;
+import co.edu.unbosque.proyecto_final.services.OwnerService;
+import co.edu.unbosque.proyecto_final.services.UserAppService;
+import co.edu.unbosque.proyecto_final.services.VetService;
+import co.edu.unbosque.proyecto_final.servlets.pojos.OfficialPOJO;
+import co.edu.unbosque.proyecto_final.servlets.pojos.OwnerPOJO;
+import co.edu.unbosque.proyecto_final.servlets.pojos.UserAppPOJO;
+import co.edu.unbosque.proyecto_final.servlets.pojos.VetPOJO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;

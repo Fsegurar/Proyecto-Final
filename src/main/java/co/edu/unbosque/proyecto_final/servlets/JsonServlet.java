@@ -1,4 +1,4 @@
-package co.edu.unbosque.taller_3;
+package co.edu.unbosque.proyecto_final.servlets;
 
 import com.google.gson.Gson;
 

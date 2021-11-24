@@ -1,9 +1,15 @@
-package edu.unbosque.Taller_5.services;
+package co.edu.unbosque.proyecto_final.services;
 
-import edu.unbosque.Taller_5.jpa.entities.*;
-import edu.unbosque.Taller_5.jpa.repositories.*;
-import edu.unbosque.Taller_5.servlets.pojos.UserAppPOJO;
-import edu.unbosque.Taller_5.servlets.pojos.VisitPOJO;
+
+
+import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
+import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
+import co.edu.unbosque.proyecto_final.jpa.entities.Visit;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepositoryImpl;
+import co.edu.unbosque.proyecto_final.jpa.repositories.VisitRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.VisitRepositoryImpl;
+import co.edu.unbosque.proyecto_final.servlets.pojos.VisitPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

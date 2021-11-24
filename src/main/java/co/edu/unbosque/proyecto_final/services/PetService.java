@@ -1,12 +1,14 @@
-package edu.unbosque.Taller_5.services;
+package co.edu.unbosque.proyecto_final.services;
 
-import edu.unbosque.Taller_5.jpa.entities.Owner;
-import edu.unbosque.Taller_5.jpa.entities.Pet;
-import edu.unbosque.Taller_5.jpa.repositories.OwnerRepository;
-import edu.unbosque.Taller_5.jpa.repositories.OwnerRepositoryImpl;
-import edu.unbosque.Taller_5.jpa.repositories.PetRepository;
-import edu.unbosque.Taller_5.jpa.repositories.PetRepositoryImpl;
-import edu.unbosque.Taller_5.servlets.pojos.PetPOJO;
+
+
+import co.edu.unbosque.proyecto_final.jpa.entities.Owner;
+import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
+import co.edu.unbosque.proyecto_final.jpa.repositories.OwnerRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.OwnerRepositoryImpl;
+import co.edu.unbosque.proyecto_final.jpa.repositories.PetRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.PetRepositoryImpl;
+import co.edu.unbosque.proyecto_final.servlets.pojos.PetPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

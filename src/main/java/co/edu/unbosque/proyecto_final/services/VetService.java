@@ -1,11 +1,13 @@
-package edu.unbosque.Taller_5.services;
+package co.edu.unbosque.proyecto_final.services;
 
-import edu.unbosque.Taller_5.jpa.entities.*;
-import edu.unbosque.Taller_5.jpa.repositories.*;
-import edu.unbosque.Taller_5.servlets.pojos.OfficialPOJO;
-import edu.unbosque.Taller_5.servlets.pojos.OwnerPOJO;
-import edu.unbosque.Taller_5.servlets.pojos.PetPOJO;
-import edu.unbosque.Taller_5.servlets.pojos.VetPOJO;
+
+import co.edu.unbosque.proyecto_final.jpa.entities.UserApp;
+import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepositoryImpl;
+import co.edu.unbosque.proyecto_final.jpa.repositories.VetRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.VetRepositoryImpl;
+import co.edu.unbosque.proyecto_final.servlets.pojos.VetPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,7 +23,7 @@ public class VetService {
     UserAppRepository userRepository;
     VetRepository vetRepository;
 
-    public VetPOJO editNameByUsername(String username,String name){
+    public VetPOJO editNameByUsername(String username, String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 

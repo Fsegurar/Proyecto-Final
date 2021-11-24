@@ -1,4 +1,4 @@
-package edu.unbosque.Taller_5.servlets.pojos;
+package co.edu.unbosque.proyecto_final.servlets.pojos;
 
 public class PetCasePOJO {
 

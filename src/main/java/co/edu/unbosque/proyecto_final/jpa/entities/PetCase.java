@@ -1,4 +1,4 @@
-package edu.unbosque.Taller_5.jpa.entities;
+package co.edu.unbosque.proyecto_final.jpa.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;

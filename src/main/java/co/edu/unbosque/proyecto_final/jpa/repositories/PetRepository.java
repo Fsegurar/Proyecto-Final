@@ -1,6 +1,8 @@
-package edu.unbosque.Taller_5.jpa.repositories;
+package co.edu.unbosque.proyecto_final.jpa.repositories;
 
-import edu.unbosque.Taller_5.jpa.entities.Pet;
+
+
+import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
 
 import java.util.List;
 import java.util.Optional;

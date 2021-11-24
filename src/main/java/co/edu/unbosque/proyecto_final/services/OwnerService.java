@@ -1,10 +1,14 @@
-package edu.unbosque.Taller_5.services;
+package co.edu.unbosque.proyecto_final.services;
 
-import edu.unbosque.Taller_5.jpa.entities.Official;
-import edu.unbosque.Taller_5.jpa.entities.Owner;
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
-import edu.unbosque.Taller_5.jpa.repositories.*;
-import edu.unbosque.Taller_5.servlets.pojos.OwnerPOJO;
+
+
+import co.edu.unbosque.proyecto_final.jpa.entities.Owner;
+import co.edu.unbosque.proyecto_final.jpa.entities.UserApp;
+import co.edu.unbosque.proyecto_final.jpa.repositories.OwnerRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.OwnerRepositoryImpl;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepositoryImpl;
+import co.edu.unbosque.proyecto_final.servlets.pojos.OwnerPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,7 +24,7 @@ public class OwnerService {
     OwnerRepository ownerRepository;
     UserAppRepository userRepository;
 
-    public OwnerPOJO editNameByUsername(String username,String name){
+    public OwnerPOJO editNameByUsername(String username, String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 

@@ -1,6 +1,7 @@
-package edu.unbosque.Taller_5.servlets.pojos;
+package co.edu.unbosque.proyecto_final.servlets.pojos;
 
-import edu.unbosque.Taller_5.jpa.entities.Pet;
+
+import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
 
 public class VisitPOJO {
 

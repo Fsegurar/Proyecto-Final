@@ -1,13 +1,15 @@
-package edu.unbosque.Taller_5.services;
+package co.edu.unbosque.proyecto_final.services;
 
 
-import edu.unbosque.Taller_5.jpa.entities.Official;
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
-import edu.unbosque.Taller_5.jpa.repositories.OfficialRepository;
-import edu.unbosque.Taller_5.jpa.repositories.OfficialRepositoryImpl;
-import edu.unbosque.Taller_5.jpa.repositories.UserAppRepository;
-import edu.unbosque.Taller_5.jpa.repositories.UserAppRepositoryImpl;
-import edu.unbosque.Taller_5.servlets.pojos.OfficialPOJO;
+
+
+import co.edu.unbosque.proyecto_final.jpa.entities.Official;
+import co.edu.unbosque.proyecto_final.jpa.entities.UserApp;
+import co.edu.unbosque.proyecto_final.jpa.repositories.OfficialRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.OfficialRepositoryImpl;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepositoryImpl;
+import co.edu.unbosque.proyecto_final.servlets.pojos.OfficialPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,7 +25,7 @@ public class OfficialService {
     OfficialRepository officialRepository;
     UserAppRepository userRepository;
 
-    public OfficialPOJO editNameByUsername(String username,String name){
+    public OfficialPOJO editNameByUsername(String username, String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 

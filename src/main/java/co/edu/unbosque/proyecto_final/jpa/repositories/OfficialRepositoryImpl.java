@@ -1,7 +1,7 @@
-package edu.unbosque.Taller_5.jpa.repositories;
+package co.edu.unbosque.proyecto_final.jpa.repositories;
 
-import edu.unbosque.Taller_5.jpa.entities.Official;
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
+
+import co.edu.unbosque.proyecto_final.jpa.entities.Official;
 
 import javax.persistence.EntityManager;
 import java.util.List;

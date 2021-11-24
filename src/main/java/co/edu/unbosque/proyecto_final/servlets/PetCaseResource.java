@@ -1,7 +1,9 @@
-package edu.unbosque.Taller_5.servlets;
+package co.edu.unbosque.proyecto_final.servlets;
 
-import edu.unbosque.Taller_5.services.PetCaseService;
-import edu.unbosque.Taller_5.servlets.pojos.PetCasePOJO;
+
+
+import co.edu.unbosque.proyecto_final.services.PetCaseService;
+import co.edu.unbosque.proyecto_final.servlets.pojos.PetCasePOJO;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

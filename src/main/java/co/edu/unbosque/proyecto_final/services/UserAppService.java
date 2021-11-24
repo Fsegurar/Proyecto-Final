@@ -1,10 +1,12 @@
-package edu.unbosque.Taller_5.services;
+package co.edu.unbosque.proyecto_final.services;
 
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
-import edu.unbosque.Taller_5.jpa.repositories.UserAppRepository;
-import edu.unbosque.Taller_5.jpa.repositories.UserAppRepositoryImpl;
-import edu.unbosque.Taller_5.servlets.pojos.UserAppPOJO;
 
+
+
+import co.edu.unbosque.proyecto_final.jpa.entities.UserApp;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepository;
+import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepositoryImpl;
+import co.edu.unbosque.proyecto_final.servlets.pojos.UserAppPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,7 +21,7 @@ public class UserAppService {
 
     UserAppRepository userappRepository;
 
-    public UserAppPOJO editEmailByUsername(String username,String email){
+    public UserAppPOJO editEmailByUsername(String username, String email){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
