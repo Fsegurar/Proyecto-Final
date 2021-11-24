@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ciudadanos de 4 Patas</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity ="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" >
+    </head>
+    <body>
+        <div class="container">
+            <div class="flotante">
+                <div class="row">
+                    <div class="row row-cols-2">
+                        <div class="col">
+                            <h2>Propietario</h2>
+                            <br/>
+                        </div>
+                        <div class="col" style="text-align-last: end">
+                            <button class="btn btn-secondary" id="logout-button">Logout</button>
+                            <br/>
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <form enctype="multipart/form-data" action="multiPartServlet" method="post">
+                        <div>
+                            <label  class="col-sm-6" for="petname"> Nombre de la mascota:</label>
+                            <input name ="petname" id="petname" type="text" class="form-control  col-sm-2" placeholder="Nombre del propietario" required/>
+                            <div class="valid-feedback">Validado.</div>
+                            <div class="invalid-feedback">Por favor llene este campo.</div>
+                        </div>
+                        <div>
+                            <br/>
+                            <input type="file" id="imagen" name="imagensubida" accept="image/png, .jpeg, .jpg, image/gif">
+                        </div>
+                        <div>
+                            <br/>
+                            <input id="save-button" type="submit" class="botons" value="Save"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer  bg-dark text-white" style="margin-top: 175px;">
+            <br/><br/>
+            <img src="./Img/logo-ub.png"  width="229" height="67">
+            <p>David Real, Felipe Segura</p>
+            <br/><br/>
+        </div>
+        <script>
+            //Checks if the login is done
+            if(document.cookie.length===0){
+                window.location.href = location.href.replace("propietario.html","");
+            }
+            //Save Pet
+            document.getElementById("save-button").onclick=function (){
+                if((document.getElementById("petname").value!=='') && (document.getElementById("imagen").value!=='')) {
+                    window.alert("Guardado Exitosamente");
+                }
+            }
+            //Logout button to erase cookies
+            document.getElementById("logout-button").onclick = function (){
+                document.cookie = "Rol = ; expires = "+Date();
+                document.cookie = "Email = ; expires = "+Date();
+                window.location.href = location.href.replace("propietario.html","");
+            }
+
+        </script>
+    </body>
+</html>
