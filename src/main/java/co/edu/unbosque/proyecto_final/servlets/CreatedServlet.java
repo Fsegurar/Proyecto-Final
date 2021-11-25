@@ -13,7 +13,7 @@ public class CreatedServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //no se que debria responder por que creeo que deberia devilverse al index pero si esta repetido el usuario o las contraseñas no coinciden deberia mostrase el alert en el de creacion
-        response.setContentType("application/json");
+        response.setContentType("multipart/form-data");
 
         String username = request.getParameter("username");
         String password1 = request.getParameter("password");
@@ -44,11 +44,16 @@ public class CreatedServlet extends HttpServlet {
         if (role.equalsIgnoreCase("propietario")){
             OwnerPOJO owner = new OwnerPOJO(name,address,neighborhood);
             UserAppPOJO userapp = new UserAppPOJO(username,password1, email,role,owner);
-            // aqui quiero pasar userapp a userappresources
         }else {
             VetPOJO vet = new VetPOJO(name,address,neighborhood);
             UserAppPOJO userAppPOJO = new UserAppPOJO(username,password1,email,role,vet);
-            // aqui quiero pasar userapp a userappresources
+            UserAppResource userAppResource = new UserAppResource();
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('usuario creado');");
+            out.println("window.location.href = history.back()");
+            out.println("</script>");
         }
+        response.sendRedirect(request.getContextPath() + "/index.html");
     }
 }
