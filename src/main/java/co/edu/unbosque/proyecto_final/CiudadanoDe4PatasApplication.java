@@ -1,4 +1,4 @@
-package edu.unbosque.Taller_5;
+package co.edu.unbosque.proyecto_final;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

@@ -12,28 +12,25 @@ import co.edu.unbosque.proyecto_final.servlets.pojos.OwnerPOJO;
 import co.edu.unbosque.proyecto_final.servlets.pojos.UserAppPOJO;
 import co.edu.unbosque.proyecto_final.servlets.pojos.VetPOJO;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.io.*;
 import java.io.PrintWriter;
 import java.util.Optional;
 
 @Path("/users")
-public class UserAppResource extends HttpServlet {
+public class UserAppResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+    public Response create(UserAppPOJO userapp){
 
-        UserAppPOJO userapp = new UserAppPOJO();
+
+        /*UserAppPOJO userapp = new UserAppPOJO();
         String username = request.getParameter("username");
         String password1 = request.getParameter("password");
-        String password2 = request.getParameter("password2");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
         String name = request.getParameter("name");
@@ -45,8 +42,8 @@ public class UserAppResource extends HttpServlet {
         }else {
             VetPOJO vet = new VetPOJO(name,address,neighborhood);
             userapp = new UserAppPOJO(username,password1,email,role,vet);
-        }
-        response.sendRedirect(request.getContextPath() + "/index.html");
+        }*/
+
         Optional<UserAppPOJO> persistedUser = Optional.of(new UserAppService().saveUserApp(
                 userapp.getUsername(), userapp.getPassword(), userapp.getEmail(), userapp.getRole()));
 
@@ -72,11 +69,11 @@ public class UserAppResource extends HttpServlet {
         if (persistedUser.isPresent()) {
             return Response.status(Response.Status.CREATED)
                     .build();
+
         } else {
             return Response.status(400)
                     .build();
         }
-
     }
 
     @PUT

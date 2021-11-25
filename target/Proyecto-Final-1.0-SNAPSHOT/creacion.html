@@ -23,31 +23,30 @@
                 <form class="needs-validation"  action="creadted-servlet"  method="post" novalidate>
                     <div class="form-group">
                         <label  class="mb-2 mr-sm-2">Nombre de Usuario</label>
-                        <input id="username-input" type="text" class="form-control mb-2 mr-sm-2" name="username"required/>
+                        <input id="username-input-crear" type="text" class="form-control mb-2 mr-sm-2" name="username"required/>
                         <div class="valid-feedback">Validado.</div>
-                        <div class="invalid-feedback">Por favor llene este campo.</div>
+                        <div id="username-error" class="invalid-feedback" value="Por favor llene este campo."></div>
                     </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Contraseña:</label>
-                        <input id="pw-input" type="password" class="form-control mb-2 mr-sm-2" name="password"required/>
+                        <input id="pw-input-crear" type="password" class="form-control mb-2 mr-sm-2" name="password"required/>
                         <div class="valid-feedback">Validado.</div>
                         <div class="invalid-feedback">Por favor llene este campo.</div>
                     </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Validar Contraseña:</label>
-                        <input id="pw2-input" type="password" class="form-control mb-2 mr-sm-2" name="password2"required/>
+                        <input id="pw2-input-crear" type="password" class="form-control mb-2 mr-sm-2" name="password2"required/>
                         <div class="valid-feedback">Validado.</div>
-                        <div class="invalid-feedback">Por favor llene este campo.</div>
+                        <div id="psw1-error" class="invalid-feedback" value="Por favor llene este campo."></div>
                     </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Email:</label>
-                        <input id="email-input" type="email" class="form-control mb-2 mr-sm-2" name="email"required/>
+                        <input id="email-input-crear" type="email" class="form-control mb-2 mr-sm-2" name="email"required/>
                         <div class="valid-feedback">Validado.</div>
-                        <div class="invalid-feedback">Por favor llene este campo.</div>
-                    </div>
+                        <div id="psw-error" class="invalid-feedback" value="Por favor llene este campo."></div>                    </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Role:</label>
-                        <select id="role-input" name="role" required>
+                        <select id="role-input-crear" name="role" required>
                             <option></option>
                             <option>Owner</option>
                             <option>Vet</option>
@@ -55,19 +54,19 @@
                     </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Nombre Propietario/ Nombre Veterinaria:</label>
-                        <input id="name-input" type="text" class="form-control mb-2 mr-sm-2" name="name"required/>
+                        <input id="name-input-crear" type="text" class="form-control mb-2 mr-sm-2" name="name"required/>
                         <div class="valid-feedback">Validado.</div>
                         <div class="invalid-feedback">Por favor llene este campo.</div>
                     </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Direccion:</label>
-                        <input id="address-input" type="text" class="form-control mb-2 mr-sm-2" name="address"required/>
+                        <input id="address-input-crear" type="text" class="form-control mb-2 mr-sm-2" name="address"required/>
                         <div class="valid-feedback">Validado.</div>
                         <div class="invalid-feedback">Por favor llene este campo.</div>
                     </div>
                     <div class="form-group">
                         <label  class="mb-2 mr-sm-2">Localidad:</label>
-                        <select id="neightbor-input" name="neighborhood" required>
+                        <select id="neightbor-input-crear" name="neighborhood" required>
                             <option></option>
                             <option>A. NARINO</option>
                             <option>B. UNIDOS</option>
@@ -100,7 +99,6 @@
             </div>
         </div>
     </div>
-
-
+    <script src="./js/main.js"></script>
 </body>
 </html>
