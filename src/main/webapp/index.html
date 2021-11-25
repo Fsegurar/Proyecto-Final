@@ -39,15 +39,23 @@
                     </form>
                 </div>
             </div>
+            <div class="card-footer  bg-dark text-white" style="margin-top: 175px;">
+                <br/><br/>
+                <img src="./Img/logo-ub.png"  width="229" height="67">
+                <p>David Real, Felipe Segura</p>
+                <br/><br/>
+            </div>
         </div>
         <script>
             var cookies = document.cookie.split(";");
-            if(cookies[1].includes("owner")){
-                window.location.href = location.href + "propietario.html";
-            }else if(cookies[1].includes("official")){
-                window.location.href = location.href + "funcionario.html";
-            }else if (cookies[1].includes("vet")){
-                window.location.href = location.href + "vet.html";
+            for(var i =0;i<cookies.length;i++){
+                if (cookies[i].includes("owner")) {
+                    window.location.href = location.href + "propietario.html";
+                } else if (cookies[i].includes("official")) {
+                    window.location.href = location.href + "funcionario.html";
+                } else if (cookies[i].includes("vet")) {
+                    window.location.href = location.href + "vet.html";
+                }
             }
         </script>
     </body>
