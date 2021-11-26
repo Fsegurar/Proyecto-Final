@@ -13,6 +13,8 @@ public interface VetRepository {
 
     Optional<Vet> findByName(String name);
 
+    Optional<Vet> findByUserName(String username);
+
     Optional<Vet> findByAddress(String Address);
 
     Optional<Vet> findByNeighborhood(String neighborhood);
