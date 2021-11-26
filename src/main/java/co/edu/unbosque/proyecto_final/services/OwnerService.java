@@ -109,6 +109,24 @@ public class OwnerService {
 
         return persistedOwner;
     }
+    public Owner findByUserName(String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerRepositoryImpl(entityManager);
+        Owner persistedOwner = null;
+        List<Owner> owners = ownerRepository.findAll();
+        for(Owner owner : owners){
+            if(owner.getUsername().getUsername().equals(username)){
+                persistedOwner=owner;
+            }
+        }
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedOwner;
+    }
 
     public Owner findByAddress(String address){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
