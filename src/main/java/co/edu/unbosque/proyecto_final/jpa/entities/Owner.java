@@ -3,18 +3,17 @@ package co.edu.unbosque.proyecto_final.jpa.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Owner")
 public class Owner implements Serializable {
+private String usename;
 
     @Id
     @OneToOne
-    @JoinColumn(name = "username")
-    private UserApp username;
+    @JoinColumn(name = "username",referencedColumnName = "username")
+    private UserApp userapp;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, unique = true, name = "person_id")
@@ -29,7 +28,7 @@ public class Owner implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner")
     private List<Pet> pets;
 
     @PreUpdate
@@ -44,28 +43,37 @@ public class Owner implements Serializable {
         this.address = address;
         this.neighborhood = neighborhood;
     }
-
-    public Owner(Integer person_id, String name, String address, String neighborhood) {
-        this.person_id = person_id;
+    /*public Owner( String username,Integer person_id,String name, String address, String neighborhood) {
+        this.usename=username;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
-    }
+        this.person_id=person_id;
+    }*/
+
 
     public List<Pet> getPets() {
         return pets;
+    }
+
+    public String getUsename() {
+        return usename;
+    }
+
+    public void setUsename(String usename) {
+        this.usename = usename;
     }
 
     public void setPets(List<Pet> pets) {
         this.pets = pets;
     }
 
-    public UserApp getUsername() {
-        return username;
+    public UserApp getUserapp() {
+        return userapp;
     }
 
-    public void setUsername(UserApp userapp) {
-        this.username = userapp;
+    public void setUserapp(UserApp userapp) {
+        this.userapp = userapp;
     }
 
     public Integer getPerson_id() {

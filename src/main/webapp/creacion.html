@@ -20,12 +20,12 @@
                     <h4>Bienvenido a Ciudadano de 4 patas</h4>
                     <p>Por favor diligencie los siguentes campos</p>
                 </div>
-                <form class="needs-validation"  action="creadted-servlet"  method="post" novalidate>
+                <form class="was-validated"  novalidate>
                     <div class="form-group">
                         <label  class="mb-2 mr-sm-2">Nombre de Usuario</label>
                         <input id="username-input-crear" type="text" class="form-control mb-2 mr-sm-2" name="username"required/>
                         <div class="valid-feedback">Validado.</div>
-                        <div id="username-error" class="invalid-feedback" value="Por favor llene este campo."></div>
+                        <div id="username-error" class="invalid-feedback" >Por favor llene este campo.</div>
                     </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Contraseña:</label>
@@ -37,19 +37,20 @@
                         <label class="mb-2 mr-sm-2">Validar Contraseña:</label>
                         <input id="pw2-input-crear" type="password" class="form-control mb-2 mr-sm-2" name="password2"required/>
                         <div class="valid-feedback">Validado.</div>
-                        <div id="psw1-error" class="invalid-feedback" value="Por favor llene este campo."></div>
+                        <div id="psw1-error" class="invalid-feedback" >Por favor llene este campo.</div>
                     </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Email:</label>
                         <input id="email-input-crear" type="email" class="form-control mb-2 mr-sm-2" name="email"required/>
                         <div class="valid-feedback">Validado.</div>
-                        <div id="psw-error" class="invalid-feedback" value="Por favor llene este campo."></div>                    </div>
+                        <div id="psw-error" class="invalid-feedback"> Por favor llene este campo.</div>
+                    </div>
                     <div class="form-group">
                         <label class="mb-2 mr-sm-2">Role:</label>
                         <select id="role-input-crear" name="role" required>
                             <option></option>
-                            <option>Owner</option>
-                            <option>Vet</option>
+                            <option>owner</option>
+                            <option>vet</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -100,39 +101,87 @@
         </div>
     </div>
     <script>
-
-        (function() {
-            const forms = document.getElementsByClassName('needs-validation');
-            const validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        console.log(form.checkValidity())
-                        event.preventDefault();
-                        event.stopPropagation();
-                    } else if (form.checkValidity() === true) {
-                        let username = document.getElementById("username-input-crear").value
-                        let psw1 = document.getElementById("pw-input-crear").value
-                        let psw2 = document.getElementById("pw2-input-crear").value
-                        for (var i = 0; i < user.listUsers().size(); i++) {
-                            if (user.listUsers().get(i).getUsername().equalsIgnoreCase(username)) {
-                                document.getElementById("username-error").setAttribute("value", "nombre de usuario ya existe")
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                        }
-                        if (!psw1.equals(psw2)) {
-                            document.getElementById("psw1-error").setAttribute("value", "Las contraseñas no coinciden")
-                            document.getElementById("psw2-error").setAttribute("value", "Las contraseñas no coinciden")
-                            event.preventDefault();
+        const form = document.querySelector('form');
+        form.addEventListener('submit',handleSubmit)
+        function handleSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const value = Object.fromEntries(data.entries());
+            console.log({value})
+            let nickname = document.getElementById("username-input-crear").value;
+            let psw1 = document.getElementById("pw-input-crear").value;
+            let psw2 = document.getElementById("pw2-input-crear").value;
+            let email = document.getElementById("email-input-crear").value;
+            let name = document.getElementById("name-input-crear").value;
+            let role = document.getElementById("role-input-crear").value;
+            let address = document.getElementById("address-input-crear").value;
+            let localidad = document.getElementById("neightbor-input-crear").value;
+            var contador = 0;
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    data.forEach((user) => {
+                        if (nickname === user.username) {
+                            contador++;
+                            window.alert("EL ususario ya existe");
                             event.stopPropagation();
                         }
-                    }
-                    ;
-                    form.classList.add('was-validated');
-                }, false);
-            });
+                    })
+                })
 
-        })();
+            if (psw1!=(psw2)) {
+                contador++;
+                window.alert("Las contraseñas no coinciden");
+                event.stopPropagation();
+            }
+            if (contador === 0) {
+                if (role === "vet") {
+                    let userapp = {
+                        username: nickname,
+                        password: psw1,
+                        email: email,
+                        role: role,
+                        vet: {
+                            name: name,
+                            address: address,
+                            neighborhood: localidad
+                        }
+                    }
+                    fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/user', {
+                        method: 'POST',
+                        body: JSON.stringify(userapp),
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8'
+                        }
+                    })
+                    window.location.href = location.href.replace("creacion.html","index.html");
+                } else if (role === "owner") {
+                    let userapp = {
+                        username: nickname,
+                        password: psw1,
+                        email: email,
+                        role: role,
+                        owner: {
+                            name: name,
+                            address: address,
+                            neighborhood: localidad
+                        }
+                    }
+                    fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/user', {
+                        method: 'POST',
+                        body: JSON.stringify(userapp),
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8'
+                        }
+                    })
+                    window.location.href = location.href.replace("creacion.html","index.html");
+                }
+            }else {
+                window.alert("No creado");
+                event.stopPropagation();
+            }
+        };
 
     </script>
 </body>

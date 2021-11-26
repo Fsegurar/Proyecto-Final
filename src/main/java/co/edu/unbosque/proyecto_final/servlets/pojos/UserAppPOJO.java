@@ -20,13 +20,13 @@ public class UserAppPOJO {
         this.role = role;
     }
 
-    public UserAppPOJO(String username, String password, String email, String role, OfficialPOJO official) {
+   /* public UserAppPOJO(String username, String password, String email, String role, OfficialPOJO official) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
         this.official = official;
-    }
+    }*/
 
     public UserAppPOJO(String username, String password, String email, String role, OwnerPOJO owner) {
         this.username = username;

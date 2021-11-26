@@ -7,14 +7,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 
-@Path("users/owner/{username}")
+@Path("/users/owner/{id}")
 public class OwnerResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOwner(@PathParam("username") String username){
+    public Response getOwner(@PathParam("id") Integer id){
 
-        Optional persistedOwner = Optional.of(new OwnerService().findByUsername(username));
+        Optional persistedOwner = Optional.of(new OwnerService().findByOwnerId(id));
 
         if (persistedOwner.isPresent()) {
             return Response.status(Response.Status.OK)

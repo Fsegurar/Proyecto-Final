@@ -272,18 +272,32 @@
             }
             let owner;
             let neighbor;
-            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/owners')
+            var contador=0;
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users')
                 .then(response => response.json())
                 .then(data =>{
                     console.log(data)
                     data.forEach((id)=>{
-                        if(user===id.username){
-                            owner = id.person_id;
-                            neighbor=id.neighborhood;
+                        if("owner"===id.role){
+                            contador++;
                         }
                     });
 
                 });
+            for (var i=0;i<contador;i++){
+                fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owners/'+(i+1))
+                .then(response=>response.json())
+                .then(data=>{
+                    console.log(data);
+                    data.forEach((usuario)=>{
+                        if (usuario===user){
+                            owner=i;
+                            neighbor=usuario.neighborhood;
+                            i=contador;
+                        }
+                    })
+                })
+            }
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/pets')
                 .then(response => response.json())
                 .then(data =>{

@@ -32,13 +32,6 @@ public class OwnerRepositoryImpl implements OwnerRepository{
         return visit != null ? Optional.of(visit) : Optional.empty();
     }
 
-    @Override
-    public Optional<Owner> findByUserName(String username) {
-        Owner visit = entityManager.createQuery("SELECT b FROM Owner b WHERE b.username = :username", Owner.class)
-                .setParameter("username", username)
-                .getSingleResult();
-        return visit != null ? Optional.of(visit) : Optional.empty();
-    }
 
     @Override
     public Optional<Owner> findByAddress(String address) {
@@ -119,7 +112,7 @@ public class OwnerRepositoryImpl implements OwnerRepository{
     }
 
     @Override
-    public Optional<Owner> findByUsername(String username) {
+    public Optional<Owner> findByUserName(String username) {
         Owner owner = entityManager.find(Owner.class,username);
         return owner!=null ? Optional.of(owner) : Optional.empty();
     }

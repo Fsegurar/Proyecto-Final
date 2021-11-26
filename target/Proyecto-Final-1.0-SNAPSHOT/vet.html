@@ -51,7 +51,7 @@
     <script>
         //Checks if the login is done
         if(document.cookie.length===0){
-            window.location.href = location.href.replace("funcionario.html","");
+            window.location.href = location.href.replace("vet.html","");
         }
         //Fetch jsonServlet
         fetch("jsonServlet")
@@ -85,7 +85,7 @@
         //Logout button to erase cookies
         document.getElementById("logout-button").onclick = function (){
             document.cookie = "Rol = ; expires = "+Date();
-            document.cookie = "Email = ; expires = "+Date();
+            document.cookie = "usename = ; expires = "+Date();
             window.location.href = location.href.replace("funcionario.html","");
         }
     </script>

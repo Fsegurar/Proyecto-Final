@@ -24,6 +24,8 @@
             <img src="./Img/pata.png" style="margin-left:20px" width="75" height="75">
             <a class="navbar-brand" style="margin-left:20px">Bienvenid@</a>
             <b class="text-secondary">   Este es el formulario que debe diligenciar para registrar una nueva mascota</b>
+
+            <button class="btn btn-secondary" id="logout-button">Logout</button>
         </nav>
         <div class="container" style="margin-left: 10px">
             <div class="row">
@@ -225,6 +227,15 @@
         let catBreeds = [];
         var rowId = 0;
 
+        //Checks if the login is done
+        if(document.cookie.length===0){
+            window.location.href = location.href.replace("propietario.html","");
+        }
+        document.getElementById("logout-button").onclick = function (){
+            document.cookie = "Rol = ; expires = "+Date();
+            document.cookie = "username = ; expires = "+Date();
+            window.location.href = location.href.replace("propietario.html","");
+        }
         fetch('https://dog.ceo/api/breeds/list/all')
             .then(response => response.json())
             .then(data => {
@@ -261,18 +272,32 @@
             }
             let owner;
             let neighbor;
-            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/owners')
+            var contador=0;
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users')
                 .then(response => response.json())
                 .then(data =>{
                     console.log(data)
                     data.forEach((id)=>{
-                        if(user===id.username){
-                            owner = id.person_id;
-                            neighbor=id.neighborhood;
+                        if("owner"===id.role){
+                            contador++;
                         }
                     });
 
                 });
+            for (var i=0;i<contador;i++){
+                fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owners/'+(i+1))
+                .then(response=>response.json())
+                .then(data=>{
+                    console.log(data);
+                    data.forEach((usuario)=>{
+                        if (usuario===user){
+                            owner=i;
+                            neighbor=usuario.neighborhood;
+                            i=contador;
+                        }
+                    })
+                })
+            }
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/pets')
                 .then(response => response.json())
                 .then(data =>{
@@ -288,7 +313,7 @@
                             img.setAttribute("alt","Cinque Terre")
                             img.setAttribute("width","200" )
                             img.setAttribute("height","156")
-                            img.setAttribute("src",pet.picture)
+                            img.setAttribute("src","./uploads/"+pet.picture)
                             tdimg.appendChild(img);
                             tr.appendChild(tdimg);
                             let pets= {

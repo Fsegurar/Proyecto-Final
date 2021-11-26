@@ -39,7 +39,7 @@ public class Pet implements Serializable {
     private String picture;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "person_id")
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     private Owner owner;
 
     @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER)

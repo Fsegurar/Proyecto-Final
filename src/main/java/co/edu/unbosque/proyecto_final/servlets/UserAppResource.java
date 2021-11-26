@@ -16,7 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.Optional;
 
-@Path("/users")
+@Path("/user")
 public class UserAppResource {
 
     @POST
