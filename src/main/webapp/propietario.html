@@ -272,32 +272,16 @@
             }
             let owner;
             let neighbor;
-            var contador=0;
-            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users')
-                .then(response => response.json())
-                .then(data =>{
-                    console.log(data)
-                    data.forEach((id)=>{
-                        if("owner"===id.role){
-                            contador++;
-                        }
-                    });
+            var comoquiera=[];
 
-                });
-            for (var i=0;i<contador;i++){
-                fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owners/'+(i+1))
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owner/'+(user))
                 .then(response=>response.json())
-                .then(data=>{
+                .then(data => {
                     console.log(data);
-                    data.forEach((usuario)=>{
-                        if (usuario===user){
-                            owner=i;
-                            neighbor=usuario.neighborhood;
-                            i=contador;
-                        }
-                    })
+                    owner=data.person_id;
+                    neighbor=data.neighborhood;
                 })
-            }
+
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/pets')
                 .then(response => response.json())
                 .then(data =>{
@@ -309,7 +293,7 @@
                             let tdimg = document.createElement("td");
                             let img = document.createElement("img");
                             img.setAttribute("class","rounded")
-                            img.setAttribute("id","img-"+(i+1))
+                            img.setAttribute("id","img-"+(rowId+1))
                             img.setAttribute("alt","Cinque Terre")
                             img.setAttribute("width","200" )
                             img.setAttribute("height","156")
@@ -335,7 +319,7 @@
 
                             //tr.appendChild(tdActions);
                             let inputeditar = document.createElement("input");
-                            inputeditar.setAttribute("id", "editar-" + (i+1));
+                            inputeditar.setAttribute("id", "editar-" + (rowId+1));
                             inputeditar.setAttribute("type", "button");
                             inputeditar.setAttribute("data-toggle","modal" )
                             inputeditar.value = "Editar";

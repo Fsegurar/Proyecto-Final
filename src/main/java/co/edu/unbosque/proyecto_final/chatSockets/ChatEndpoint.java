@@ -10,19 +10,21 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@ServerEndpoint(value = "/chat/{username}", decoders = co.edu.unbosque.proyecto_final.chatSockets.MessageDecoder.class, encoders = co.edu.unbosque.proyecto_final.chatSockets.MessageEncoder.class)
+@ServerEndpoint(value = "/chat/{role}/{username}", decoders = co.edu.unbosque.proyecto_final.chatSockets.MessageDecoder.class, encoders = co.edu.unbosque.proyecto_final.chatSockets.MessageEncoder.class)
 public class ChatEndpoint {
 
     private Session session;
     private static final Set<ChatEndpoint> chatEndpoints = new CopyOnWriteArraySet<>();
     private static HashMap<String, String> users = new HashMap<>();
+    private static HashMap<String, String> roles = new HashMap<>();
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("username") String username) {
+    public void onOpen(Session session, @PathParam("username") String username, @PathParam("role") String role) {
 
         this.session = session;
         chatEndpoints.add(this);
         users.put(session.getId(), username);
+        roles.put(session.getId(), role);
 
         Message message = new Message();
         message.setFrom(username);
@@ -58,7 +60,7 @@ public class ChatEndpoint {
                     if((type.equals("open") || type.equals("close")) && users.get(endpoint.session.getId()).equals(message.getFrom())){
                         System.out.println("Sending message to " + users.get(endpoint.session.getId()));
                         endpoint.session.getBasicRemote().sendObject(message);
-                    }else if(type.equals("message")){
+                    }else if(type.equals("message") && (roles.get(endpoint.session.getId()).equals("official") || users.get(endpoint.session.getId()).equals(message.getFrom()))){
                         System.out.println("Sending message to " + users.get(endpoint.session.getId()));
                         endpoint.session.getBasicRemote().sendObject(message);
                     }

@@ -133,7 +133,7 @@
                 <label><b>Message</b></label>
                 <textarea placeholder="Type message.." name="msg" required></textarea>
 
-                <button type="submit" class="btn">Send</button>
+                <button type="submit" onclick="send()" class="btn">Send</button>
                 <button type="button" class="btn cancel" onclick="closeChat()">Close</button>
             </form>
         </div>
@@ -177,17 +177,27 @@
             document.cookie = "username = ; expires = "+Date();
             window.location.href = location.href.replace("funcionario.html","");
         }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2)
+                return parts.pop().split(';').shift();
+        }
         //Chat Management
         var ws;
 
-        //Connect to chat
-        function connect() {
-            var username = document.getElementById("username").value;
+        //Open Chat
+        function openChat() {
+            document.getElementById("myChat").style.display = "block";
+
+            var username = getCookie("username");
+            var role = getCookie("Rol");
 
             var host = document.location.host;
             var pathname = document.location.pathname;
 
-            ws = new WebSocket("ws://" + host  + pathname + "chat/" + username);
+            ws = new WebSocket("ws://" + host  + pathname + "chat/"+role+"/"+ username);
 
             ws.onmessage = function(event) {
                 var log = document.getElementById("log");
@@ -195,10 +205,6 @@
                 var message = JSON.parse(event.data);
                 log.innerHTML += message.from + " : " + message.content + "\n";
             };
-        }
-        //Open Chat
-        function openChat() {
-            document.getElementById("myChat").style.display = "block";
         }
         //Send message
         function send() {

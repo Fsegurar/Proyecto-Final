@@ -38,11 +38,11 @@ public class Pet implements Serializable {
     @Column(name = "picture")
     private String picture;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     private Owner owner;
 
-    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)
     private List<Visit> visits;
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)
