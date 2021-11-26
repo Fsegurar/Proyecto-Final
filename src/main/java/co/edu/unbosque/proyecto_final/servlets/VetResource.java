@@ -17,10 +17,11 @@ public class VetResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVet(@PathParam("username") String username){
 
-        Optional persistedVet = Optional.of(new VetService());
+        Optional persistedVet = Optional.of(new VetService().findByUsername(username));
 
         if (persistedVet.isPresent()) {
             return Response.status(Response.Status.OK)
+                    .entity(persistedVet.get())
                     .build();
         } else {
             return Response.status(400)

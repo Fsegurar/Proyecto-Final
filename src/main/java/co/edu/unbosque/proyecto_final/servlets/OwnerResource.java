@@ -14,10 +14,11 @@ public class OwnerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOwner(@PathParam("username") String username){
 
-        Optional persistedOwner = Optional.of(new OwnerService());
+        Optional persistedOwner = Optional.of(new OwnerService().findByUsername(username));
 
         if (persistedOwner.isPresent()) {
             return Response.status(Response.Status.OK)
+                    .entity(persistedOwner.get())
                     .build();
         } else {
             return Response.status(400)
