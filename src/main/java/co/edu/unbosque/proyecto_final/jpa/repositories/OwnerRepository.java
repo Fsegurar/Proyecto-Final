@@ -13,6 +13,8 @@ public interface OwnerRepository {
 
     Optional<Owner> findByName(String name);
 
+    Optional<Owner> findByUserName(String username);
+
     Optional<Owner> findByAddress(String address);
 
     Optional<Owner> findByNeighborhood(String neighborhood);

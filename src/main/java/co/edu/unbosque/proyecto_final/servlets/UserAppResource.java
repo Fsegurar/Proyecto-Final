@@ -12,11 +12,8 @@ import co.edu.unbosque.proyecto_final.servlets.pojos.OwnerPOJO;
 import co.edu.unbosque.proyecto_final.servlets.pojos.UserAppPOJO;
 import co.edu.unbosque.proyecto_final.servlets.pojos.VetPOJO;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.io.PrintWriter;
 import java.util.Optional;
 
 @Path("/users")

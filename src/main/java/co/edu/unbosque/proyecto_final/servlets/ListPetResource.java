@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 
-@Path("pets")
+@Path("/pets")
 public class ListPetResource {
 
     @GET
