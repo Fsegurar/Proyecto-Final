@@ -98,6 +98,23 @@ public class VetService {
 
         return persistedVet;
     }
+    public Vet findByUserName(String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetRepositoryImpl(entityManager);
+        Vet persistedVet=null;
+        List<Vet> vets = vetRepository.findAll();
+        for (Vet vet : vets) {
+            if(vet.getUsername().getUsername().equals(username)){
+                persistedVet = vet;
+            }
+        }
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedVet;
+    }
 
     public Vet findByAdress(String Adress){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
