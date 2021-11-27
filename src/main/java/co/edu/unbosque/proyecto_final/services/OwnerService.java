@@ -16,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Stateless
@@ -83,7 +84,7 @@ public class OwnerService {
         String user = "";
         Owner owner1=new Owner();
         for (Owner owner : owners) {
-            if (owner.getPerson_id() == owner_id) {
+            if (Objects.equals(owner.getPerson_id(), owner_id)) {
 
                 user = owner.getUserapp().getUsername();
                 System.out.print(user+"aquiiiiiiiiiii");

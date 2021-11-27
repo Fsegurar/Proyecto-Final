@@ -43,7 +43,7 @@ public class OwnerRepositoryImpl implements OwnerRepository{
 
     @Override
     public Optional<Owner> findByNeighborhood(String neighborhood) {
-        Owner visit = entityManager.createQuery("SELECT b FROM Owner b WHERE b.neighborhood = :neighborhood", Owner.class)
+        Owner visit = entityManager.createQuery("SELECT b FROM Owner b WHERE b.userapp = :neighborhood", Owner.class)
                 .setParameter("neighborhood", neighborhood)
                 .getSingleResult();
         return visit != null ? Optional.of(visit) : Optional.empty();

@@ -7,8 +7,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "Owner")
+@NamedQueries({
+        @NamedQuery(name = "Owner.findByUserName",
+                query = "SELECT a FROM Owner a WHERE a.userapp.username = :username")
+})
 public class Owner implements Serializable {
-private String usename;
+
 
     @Id
     @OneToOne
@@ -43,25 +47,16 @@ private String usename;
         this.address = address;
         this.neighborhood = neighborhood;
     }
-    /*public Owner( String username,Integer person_id,String name, String address, String neighborhood) {
-        this.usename=username;
+    public Owner( String username,Integer person_id,String name, String address, String neighborhood) {
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
         this.person_id=person_id;
-    }*/
+    }
 
 
     public List<Pet> getPets() {
         return pets;
-    }
-
-    public String getUsename() {
-        return usename;
-    }
-
-    public void setUsename(String usename) {
-        this.usename = usename;
     }
 
     public void setPets(List<Pet> pets) {
