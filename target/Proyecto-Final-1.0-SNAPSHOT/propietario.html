@@ -80,7 +80,7 @@
                             <div class="valid-feedback">Validado.</div>
                             <div class="invalid-feedback">Por favor llene este campo.</div>
                         </div>
-                        <form enctype="multipart/form-data" action="multiPartServlet" method="post">
+                        <form  action="propietario.html">
                             <div>
                                 <br/>
                                 <input type="file" id="imagen" name="imagensubida" accept="image/png, .jpeg, .jpg, image/gif">
@@ -261,21 +261,21 @@
         const case1 = document.getElementById("case1");
         const case2 = document.getElementById("case2");
 
-        function uploaddata(){
+        (function ()  {
             let user;
             const cookies = document.cookie.split(";");
-            for(let i =0; i<cookies.length; i++) {
+            for (let i = 0; i < cookies.length; i++) {
                 if (cookies[i].includes("username")) {
-                    user= cookies[i].split("=")[1];
+                    user = cookies[i].split("=")[1];
                 }
             }
-            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owner/'+(user))
-                .then(response=>response.json())
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owner/' + (user))
+                .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    document.cookie="person_id="+data.person_id;
+                    document.cookie = "person_id=" + data.person_id;
 
-                    document.cookie="neighborhood="+data.neighborhood;
+                    document.cookie = "neighborhood=" + data.neighborhood;
                 });
 
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/pets')
@@ -326,10 +326,8 @@
                     });
 
                 })
-        }
+        })();
 
-
-        uploaddata();
         const form = document.querySelector('form');
         form.addEventListener('submit',handleSubmit)
         function handleSubmit(event) {
@@ -356,7 +354,7 @@
             let sex = document.getElementById("petsex-input").value;
             let size = document.getElementById("petsize-input").value;
             let imagen = document.getElementById("imagen").value;
-            let imname =imagen.split("//")[2]
+            let imname =imagen.split("\\")[2]
             console.log(imname)
             let pet = {
                 microchip: microchip,
@@ -383,6 +381,7 @@
                 }*/
             })
             event.stopPropagation();
+            //window.location.reload();
         }
 
         document.getElementById("save-edit1").onclick= function(){
