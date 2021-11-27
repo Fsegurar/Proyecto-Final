@@ -1,8 +1,5 @@
 package co.edu.unbosque.proyecto_final.services;
 
-
-
-
 import co.edu.unbosque.proyecto_final.jpa.entities.UserApp;
 import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepository;
 import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepositoryImpl;
@@ -46,7 +43,7 @@ public class UserAppService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         userappRepository = new UserAppRepositoryImpl(entityManager);
-       UserApp persistedUserApp = userappRepository.findByUsername(username).get();
+        UserApp persistedUserApp = userappRepository.findByUsername(username).get();
 
         entityManager.close();
         entityManagerFactory.close();

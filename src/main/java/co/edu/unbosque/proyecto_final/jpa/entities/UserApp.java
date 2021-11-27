@@ -23,6 +23,7 @@ public class UserApp {
     @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
     private Official official;
 
+
     @OneToOne(mappedBy = "userapp", fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
     private Owner owner;
 

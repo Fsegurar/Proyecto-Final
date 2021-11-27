@@ -1,6 +1,8 @@
 package co.edu.unbosque.proyecto_final.jpa.entities;
 
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -9,13 +11,16 @@ import java.util.List;
 @Table(name = "Owner")
 @NamedQueries({
         @NamedQuery(name = "Owner.findByUserName",
+
                 query = "SELECT a FROM Owner a WHERE a.userapp.username = :username")
 })
 public class Owner implements Serializable {
 
 
+
+
     @Id
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username",referencedColumnName = "username")
     private UserApp userapp;
 
@@ -32,7 +37,7 @@ public class Owner implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Pet> pets;
 
     @PreUpdate

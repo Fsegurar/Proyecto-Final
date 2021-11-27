@@ -3,6 +3,7 @@ package co.edu.unbosque.proyecto_final.jpa.repositories;
 
 
 import co.edu.unbosque.proyecto_final.jpa.entities.Owner;
+import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -113,7 +114,10 @@ public class OwnerRepositoryImpl implements OwnerRepository{
 
     @Override
     public Optional<Owner> findByUserName(String username) {
-        Owner owner = entityManager.find(Owner.class,username);
+        Owner owner = entityManager.createNamedQuery("Owner.findByUserName",Owner.class)
+                .setParameter("username", username)
+                .getSingleResult();
+
         return owner!=null ? Optional.of(owner) : Optional.empty();
     }
 }

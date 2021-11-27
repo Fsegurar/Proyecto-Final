@@ -12,9 +12,9 @@ public class OwnerResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOwner(@PathParam("id") Integer id){
+    public Response getOwner(@PathParam("id") String id){
 
-        Optional persistedOwner = Optional.of(new OwnerService().findByOwnerId(id));
+        Optional persistedOwner = Optional.of(new OwnerService().findByUserName(id));
 
         if (persistedOwner.isPresent()) {
             return Response.status(Response.Status.OK)
