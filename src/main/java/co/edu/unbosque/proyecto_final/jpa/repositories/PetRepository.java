@@ -24,7 +24,7 @@ public interface PetRepository {
 
     List<Pet> findAll();
 
-    Optional<Pet> save(Pet pet);
+    //Optional<Pet> save(Pet pet);
 
     Optional<Pet> editNameByPetId(Integer pet_id,String name);
 

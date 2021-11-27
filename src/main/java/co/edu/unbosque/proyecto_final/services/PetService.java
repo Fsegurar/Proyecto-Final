@@ -265,6 +265,7 @@ public class PetService {
         owner.ifPresent(o -> {
             o.addPet( new Pet(microchip,name,species,sex,race,size,picture));
             ownerRepository.save(o);
+
         });
 
         entityManager.close();

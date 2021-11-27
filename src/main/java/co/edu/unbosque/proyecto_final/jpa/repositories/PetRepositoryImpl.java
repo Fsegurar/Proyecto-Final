@@ -77,7 +77,7 @@ public class PetRepositoryImpl implements PetRepository{
     }
 
 
-    @Override
+    /*@Override
     public Optional<Pet> save(Pet pet) {
         try {
             entityManager.getTransaction().begin();
@@ -88,7 +88,7 @@ public class PetRepositoryImpl implements PetRepository{
             e.printStackTrace();
         }
         return Optional.empty();
-    }
+    }*/
 
     @Override
     public Optional<Pet> editNameByPetId(Integer pet_id, String name) {

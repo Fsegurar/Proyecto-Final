@@ -30,7 +30,7 @@
         <div class="container" style="margin-left: 10px">
             <div class="row">
                 <div class="container-sm col-sm-6" style="margin-top:30px"> 
-                    <form class="needs-validation"   novalidate>
+                    <div class="needs-validation"   novalidate>
                         <div class="form-group">
                             <label  class="mb-2 mr-sm-2"> Nombre de la mascota:</label>
                             <input id="petname-input" type="text" class="form-control mb-2 mr-sm-2" placeholder="Nombre de la mascota" name="petname"required/>
@@ -89,7 +89,7 @@
                             <input id="petsave-button"  type="submit"  class="btn btn-outline-success" value="Guardar"/>
                             <input id="petclean-button" type="reset" class="btn btn-outline-danger"value="Limpiar" />
                         </form>
-                    </form>
+                    </div>
                 </div>
                 <div class="container col-sm-4" style="margin-top:30px">
                     <img id="dogimage" src="./Img/golden.jpg" class="rounded" alt="Cinque Terre" width="304" height="236">
@@ -111,7 +111,6 @@
                             <th class="column-header">Sexo</th>
                             <th class="column-header">Tamaño</th>
                             <th class="column-header">Localidad</th>
-                            <th class="column-header">Acciones</th>
                         </tr>
                         </thead>
                         <tbody id="body-table">
@@ -270,89 +269,122 @@
                     user= cookies[i].split("=")[1];
                 }
             }
-            let owner;
-            let neighbor;
-            var comoquiera=[];
-
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owner/'+(user))
                 .then(response=>response.json())
                 .then(data => {
                     console.log(data);
-                    owner=data.person_id;
-                    neighbor=data.neighborhood;
-                })
+                    document.cookie="person_id="+data.person_id;
+
+                    document.cookie="neighborhood="+data.neighborhood;
+                });
 
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/pets')
                 .then(response => response.json())
-                .then(data =>{
+                .then(data => {
                     console.log(data)
-                    data.forEach((pet)=>{
-                        if(owner===pet.owner_id){
+                    data.forEach((pet) => {
+                        console.log(pet.owner_id);
+                        let neighbor;
+                        var owner;
+                        for (let i = 0; i < cookies.length; i++) {
+                            if (cookies[i].includes("person_id=")) {
+                                owner = cookies[i].split("=")[1];
+                            }
+                            if (cookies[i].includes("neighborhood=")) {
+                                neighbor = cookies[i].split("=")[1];
+                            }
+                        }
+                        console.log(owner);
+                        if (owner == pet.owner_id) {
                             let tr = document.createElement("tr")
-                            tr.setAttribute("id", "row-" + (rowId+1));
+                            tr.setAttribute("id", "row-" + (rowId + 1));
                             let tdimg = document.createElement("td");
                             let img = document.createElement("img");
-                            img.setAttribute("class","rounded")
-                            img.setAttribute("id","img-"+(rowId+1))
-                            img.setAttribute("alt","Cinque Terre")
-                            img.setAttribute("width","200" )
-                            img.setAttribute("height","156")
-                            img.setAttribute("src","./uploads/"+pet.picture)
+                            img.setAttribute("class", "rounded")
+                            img.setAttribute("id", "img-" + (rowId + 1))
+                            img.setAttribute("alt", "Cinque Terre")
+                            img.setAttribute("width", "200")
+                            img.setAttribute("height", "156")
+                            img.setAttribute("src", "./uploads/" + pet.picture)
                             tdimg.appendChild(img);
                             tr.appendChild(tdimg);
-                            let pets= {
-
+                            let pets = {
                                 petname: pet.name,
                                 microchipnum: pet.microchip,
                                 petspecie: pet.species,
                                 petsex: pet.sex,
                                 petsize: pet.size,
                                 neightborinput: neighbor
-
                             }
                             Object.keys(pets).forEach((key) => {
                                 let td = document.createElement("td");
-                                td.innerHTML= pets[key];
+                                td.innerHTML = pets[key];
                                 tr.appendChild(td);
                             });
-                            let tdActions = document.createElement("td");
-
-                            //tr.appendChild(tdActions);
-                            let inputeditar = document.createElement("input");
-                            inputeditar.setAttribute("id", "editar-" + (rowId+1));
-                            inputeditar.setAttribute("type", "button");
-                            inputeditar.setAttribute("data-toggle","modal" )
-                            inputeditar.value = "Editar";
-
-                            inputeditar.onclick = function() {
-                                console.log("se leyo editar 1")
-                                let id = this.getAttribute("id");
-                                id = +id.replace("editar-", "");
-                                if(pet.microchip==""){
-                                    document.getElementById("editar-"+id).setAttribute("data-target","case1")
-                                    case1.style.display = "block";
-                                    case1.style.paddingRight = "17px";
-                                    case1.className="modal fade show";
-                                    document.getElementById("lable-m").setAttribute("class",+id+"");
-                                }else{
-                                    document.getElementById("editar-"+id).setAttribute("data-target","case2")
-                                    case2.style.display = "block";
-                                    case2.style.paddingRight = "17px";
-                                    case2.className="modal fade show";
-                                    document.getElementById("lable-m").setAttribute("class",+id+"");
-                                }
-                            };
-                            tdActions.appendChild(inputeditar);
-                            tr.appendChild(tdActions);
                             document.getElementById("body-table").appendChild(tr);
                         }
-                    })
+                    });
+
                 })
+        }
 
 
-        };
         uploaddata();
-
+        const form = document.querySelector('form');
+        form.addEventListener('submit',handleSubmit)
+        function handleSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const value = Object.fromEntries(data.entries());
+            console.log({value});
+            var owner;
+            const cookies = document.cookie.split(";");
+            for(let i =0; i<cookies.length; i++) {
+                if (cookies[i].includes("person_id=")) {
+                    owner = cookies[i].split("=")[1];
+                }
+            }
+            let petname = document.getElementById("petname-input").value;
+            let microchip = document.getElementById("petmicrochip-input").value;
+            let species = document.getElementById("petspecies-input").value;
+            let raza;
+            if(species==="Perro"){
+                raza =document.getElementById("dograza-input").value;
+            }else if (species==="Gato"){
+                raza =document.getElementById("catraza-input").value;
+            }
+            let sex = document.getElementById("petsex-input").value;
+            let size = document.getElementById("petsize-input").value;
+            let imagen = document.getElementById("imagen").value;
+            let imname =imagen.split("//")[2]
+            console.log(imname)
+            let pet = {
+                microchip: microchip,
+                name: petname,
+                picture: imname,
+                race: raza,
+                sex: sex,
+                size: size,
+                species: species
+            }
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/'+owner+'/pets', {
+                method: 'POST',
+                body: JSON.stringify(pet),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }
+            })
+            const info = new FormData(event.target);
+            fetch('multiPartServlet', {
+                method: 'POST',
+                body: info,
+                /*headers: {
+                    'Content-type': 'multipart/form-data; charset=UTF-8'
+                }*/
+            })
+            event.stopPropagation();
+            window.location.reload();
+        }
 
         document.getElementById("save-edit1").onclick= function(){
             let id = document.getElementById("lable-m").getAttribute("class")
@@ -392,29 +424,6 @@
                 document.getElementById("dograza-input").setAttribute("disabled",true)
             }
         };
-
-        (function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        console.log(form.checkValidity())
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }else if(form.checkValidity()===true){
-                        rowId += 1;
-                        event.preventDefault();
-                        event.stopPropagation();
-                        alert("Registro creado");
-                        window.location.reload()
-                        console.log(document.getElementById("row-"+rowId))
-                    };
-                    form.classList.add('was-validated');
-                }, false);
-            });
-            ;
-        })();
-
     </script>
     </body>
 </html>
