@@ -1,8 +1,7 @@
 package co.edu.unbosque.proyecto_final.servlets;
 
 import java.io.*;
-
-import co.edu.unbosque.proyecto_final.services.PetService;
+import java.util.Date;
 import org.apache.commons.io.FilenameUtils;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -13,14 +12,14 @@ import javax.servlet.annotation.*;
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class MultipartServlet extends HttpServlet {
-
+    //private ManageFiles database;
     private String UPLOAD_DIRECTORY = "uploads";
-
+    private int i;
 
     //object initialization
     public void init() {
-
-
+       // database = new ManageFiles();
+        i =0;
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,15 +36,40 @@ public class MultipartServlet extends HttpServlet {
         String fileName = "";
         try {
             for (Part part : request.getParts()) {
-                fileName = part.getSubmittedFileName();
+                String firstname =part.getSubmittedFileName();
+
+                fileName = (Math.random()*(1000000))+"."+FilenameUtils.getExtension(firstname);
                 part.write(uploadPath + File.separator + fileName);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
+        // Getting the info from the propietarios.html
+        String pet= request.getParameter("petname");
 
-        response.sendRedirect("http://localhost:8080/Taller_5-1.0-SNAPSHOT/propietario.html");
+        // Getting cookie from the browser
+        Cookie[] cookies = request.getCookies();
+        String correo ="";
+        if(cookies!=null) {
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("Email")) {
+                     correo = cookie.getValue();
+
+                }
+            }
+        }
+
+        // Getting date from the browser
+        String fecha= new Date()+"";
+        i++;
+        String archivo = fileName;
+        //adding info to the meta database
+        //database.getMeta().add(new MetaData(pet,correo,fecha,archivo));
+        String uploadPath2 = getServletContext().getRealPath("/DBfiles/MetaBD");
+       // database.setArchivodata(uploadPath2);
+        log("hola");
+        response.sendRedirect(request.getContextPath() + "/propietario.html");
 
 
     }

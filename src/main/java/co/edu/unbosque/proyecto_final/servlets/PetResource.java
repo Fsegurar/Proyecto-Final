@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 
-@Path("/users/{user_id}/pets")
+@Path("users/{user_id}/pets")
 public class PetResource {
 
     @POST

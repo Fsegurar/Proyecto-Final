@@ -11,13 +11,9 @@ import java.util.List;
 @Table(name = "Owner")
 @NamedQueries({
         @NamedQuery(name = "Owner.findByUserName",
-
-                query = "SELECT a FROM Owner a WHERE a.userapp.username = :username")
+                query = "SELECT a FROM Owner a JOIN FETCH a.userapp u WHERE u.username = :username")
 })
 public class Owner implements Serializable {
-
-
-
 
     @Id
     @OneToOne(fetch = FetchType.EAGER)
@@ -52,12 +48,13 @@ public class Owner implements Serializable {
         this.address = address;
         this.neighborhood = neighborhood;
     }
-    public Owner( String username,Integer person_id,String name, String address, String neighborhood) {
+    /*public Owner( String username,Integer person_id,String name, String address, String neighborhood) {
+        this.usename=username;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
         this.person_id=person_id;
-    }
+    }*/
 
 
     public List<Pet> getPets() {
