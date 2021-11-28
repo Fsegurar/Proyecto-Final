@@ -133,7 +133,7 @@
                 <tr>
                     <td>
                         <label><b>Message</b></label>
-                        <textarea placeholder="Type message.." name="msg" required></textarea>
+                        <input placeholder="Type message.." id="msg" required></input>
                     </td>
                 </tr>
                 <tr>
@@ -215,7 +215,7 @@
         }
         //Send message
         function send() {
-            var content = document.getElementById("msg");
+            var content = document.getElementById("msg").value;
             var json = JSON.stringify({
                 "content": content
             });
