@@ -202,9 +202,9 @@
             var role = getCookie("Rol");
 
             var host = document.location.host;
-            var pathname = document.location.pathname;
+            var pathname = document.location.pathname.split("/")[1];
 
-            ws = new WebSocket("ws://" + host  + pathname + "chat/"+role+"/"+ username);
+            ws = new WebSocket("ws://" + host +"/"+ pathname + "/chat/"+role+"/"+ username);
 
             ws.onmessage = function(event) {
                 var log = document.getElementById("log");
