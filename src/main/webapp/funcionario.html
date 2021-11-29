@@ -112,20 +112,8 @@
         </nav>
         <div class="row">
             <div class=" tabla col-sm-7" style="margin-top:30px">
-                <div class="table-responsive ">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="column-header">Foto</th>
-                            <th class="column-header">Fecha de Modificacion</th>
-                            <th class="column-header">Nombre de la mascota</th>
-                            <th class="column-header">Correo</th>
-                        </tr>
-                        </thead>
-                        <tbody id="body-table">
-                        </tbody>
-                    </table>
-                </div>
+                <h4>localidades</h4>
+                <h5>casos</h5>
             </div>
             <div class="imagenes col-sm-4" >
                 <img id="dogimage" src="./Img/golden.jpg" class="rounded" alt="Cinque Terre" width="304" height="236">
@@ -163,39 +151,35 @@
             </table>
         </div>
     <script>
+
+        (function () {
+            var A_NARINO=0;
+            var B_UNIDOS=0;
+            var BOSA=0;
+            var C_BOLIVAR=0;
+            var CHAPINERO=0;
+            var ENGATIVA=0;
+            var FONTIBON=0;
+           var KENNEDY0=0;
+            var LA_CANDELARIA=0;
+            var LOS_MARTIRES=0;
+             var P_ARANDA=0;
+            var R_URIBE=0;
+            var SAN_CRISTOBAL=0;
+            var SANTA_FE=0;
+            var SUBA=0;
+            var SUMAPAZ=0;
+            var TEUSAQUILLO=0;
+            var TUNJUELITO=0;
+            var USAQUEN=0;
+            var USME=0;
+            fetch()
+        });
         //Checks if the login is done
         if(document.cookie.length===0){
             window.location.href = location.href.replace("funcionario.html","");
         }
-        //Fetch jsonServlet
-        fetch("jsonServlet")
-            .then(response => response.json())
-            .then(data => {
-                // Using the DOM API to update an HTML img element
-                data.forEach((key) => {
-                    let tr = document.createElement("tr");
-                    let tdimg = document.createElement("td");
-                    let img = document.createElement("img");
-                    img.setAttribute("class","rounded")
-                    img.setAttribute("alt","Cinque Terre")
-                    img.setAttribute("width","200" )
-                    img.setAttribute("height","156")
-                    img.setAttribute("src","./uploads/"+key.img);
-                    tdimg.appendChild(img);
-                    tr.appendChild(tdimg);
-                    let pet = {
-                        date: key.fecha,
-                        name : key.pet,
-                        email : key.correo
-                    }
-                    Object.keys(pet).forEach((key) => {
-                        let td = document.createElement("td");
-                        td.innerHTML= pet[key];
-                        tr.appendChild(td);
-                    });
-                    document.getElementById("body-table").appendChild(tr);
-                });
-            });
+
         //Logout button to erase cookies
         document.getElementById("logout-button").onclick = function (){
             document.cookie = "Rol = ; expires = "+Date();
