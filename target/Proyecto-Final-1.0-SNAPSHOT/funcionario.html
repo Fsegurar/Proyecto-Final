@@ -33,14 +33,14 @@
         }
 
         /* Add styles to the form container */
-        .form-container {
+        .table-container {
         max-width: 300px;
         padding: 10px;
         background-color: white;
         }
 
         /* Full-width textarea */
-        .form-container textarea {
+        .table-container textarea {
         width: 100%;
         padding: 15px;
         margin: 5px 0 22px 0;
@@ -50,14 +50,32 @@
         min-height: 200px;
         }
 
+        /* Full-width input */
+        .table-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+            resize: none;
+            min-height: 200px;
+        }
+
+
         /* When the textarea gets focus, do something */
-        .form-container textarea:focus {
+        .table-container textarea:focus {
         background-color: #ddd;
         outline: none;
         }
 
+        /* When the input gets focus, do something */
+        .table-container input:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
         /* Set a style for the submit/send button */
-        .form-container .btn {
+        .table-container .btn {
         background-color: #04AA6D;
         color: white;
         padding: 16px 20px;
@@ -69,12 +87,12 @@
         }
 
         /* Add a red background color to the cancel button */
-        .form-container .cancel {
+        .table-container .cancel {
         background-color: red;
         }
 
         /* Add some hover effects to buttons */
-        .form-container .btn:hover, .open-button:hover {
+        .table-container .btn:hover, .open-button:hover {
         opacity: 1;
         }
         </style>
@@ -121,21 +139,28 @@
             <p>David Real, Felipe Segura</p>
             <br/><br/>
         </div>
-        <button class="open-button" onclick="openChat()">Chat</button>
+        <button class="open-button" onclick="openChat();">Chat</button>
         <div class="chat-popup" id="myChat">
-            <form action="Post" class="form-container">
-                <h1>Chat</h1>
+            <table class="table-container">
                 <tr>
                     <td>
+                        <h1>Chat</h1>
                         <textarea readonly="true" rows="5" cols="10" id="log"></textarea>
                     </td>
                 </tr>
-                <label><b>Message</b></label>
-                <textarea placeholder="Type message.." name="msg" required></textarea>
-
-                <button type="submit" onclick="send()" class="btn">Send</button>
-                <button type="button" class="btn cancel" onclick="closeChat()">Close</button>
-            </form>
+                <tr>
+                    <td>
+                        <label><b>Message</b></label>
+                        <input placeholder="Type message.." id="msg" required></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="send();" class="btn">Send</button>
+                        <button type="button" class="btn cancel" onclick="closeChat();">Close</button>
+                    </td>
+                </tr>
+            </table>
         </div>
     <script>
         //Checks if the login is done
@@ -195,9 +220,9 @@
             var role = getCookie("Rol");
 
             var host = document.location.host;
-            var pathname = document.location.pathname;
+            var pathname = document.location.pathname.split("/")[1];
 
-            ws = new WebSocket("ws://" + host  + pathname + "chat/"+role+"/"+ username);
+            ws = new WebSocket("ws://" + host +"/"+ pathname + "/chat/"+role+"/"+ username);
 
             ws.onmessage = function(event) {
                 var log = document.getElementById("log");
