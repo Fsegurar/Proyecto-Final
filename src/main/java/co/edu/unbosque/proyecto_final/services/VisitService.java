@@ -1,7 +1,5 @@
 package co.edu.unbosque.proyecto_final.services;
 
-
-
 import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Visit;
@@ -107,28 +105,13 @@ public class VisitService {
             EntityManager entityManager = entityManagerFactory.createEntityManager();
 
             visitRepository = new VisitRepositoryImpl(entityManager);
-            userAppRepository = new UserAppRepositoryImpl(entityManager);
 
-            Optional<Pet> pet = Optional.of(new PetService().findByPetId(pet_id));
-            Optional<Vet> vet = Optional.of(new VetService().findByName(vet_id));
-
-            Visit visit = new Visit(created_at, type, description);
-            pet.ifPresent(p -> {
-                visit.setPet(p);
-                p.addVisit(visit);
-            });
-
-            visitRepository.save(visit);
-
-            vet.ifPresent(v->{
-                visit.setVet(v);
-                v.addVisit(visit);
-            });
+            Optional<Visit> persistedVisit = visitRepository.save(new Visit(created_at, type, description), vet_id, pet_id);
 
             entityManager.close();
             entityManagerFactory.close();
 
-            VisitPOJO visitPOJO = new VisitPOJO(created_at, type, description);
+            VisitPOJO visitPOJO = new VisitPOJO(persistedVisit.get().getVisit_id(),created_at, type, description, persistedVisit.get().getPet(), persistedVisit.get().getVet());
             return visitPOJO;
         }else {
             return  null;

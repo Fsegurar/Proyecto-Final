@@ -2,6 +2,7 @@ package co.edu.unbosque.proyecto_final.servlets.pojos;
 
 
 import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
+import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 
 public class VisitPOJO {
 
@@ -12,6 +13,7 @@ public class VisitPOJO {
     private String vet_id;
     private Integer pet_id;
     private Pet pet;
+    private Vet vet;
 
     public VisitPOJO() {}
 
@@ -38,6 +40,15 @@ public class VisitPOJO {
         this.vet_id = vet_id;
         this.pet_id = pet_id;
         this.pet = pet;
+    }
+
+    public VisitPOJO(Integer visit_id, String created_at, String type, String description, Pet pet, Vet vet) {
+        this.visit_id = visit_id;
+        this.created_at = created_at;
+        this.type = type;
+        this.description = description;
+        this.pet = pet;
+        this.vet = vet;
     }
 
     public Pet getPet() {
@@ -94,5 +105,13 @@ public class VisitPOJO {
 
     public void setPet_id(Integer pet_id) {
         this.pet_id = pet_id;
+    }
+
+    public Vet getVet() {
+        return vet;
+    }
+
+    public void setVet(Vet vet) {
+        this.vet = vet;
     }
 }

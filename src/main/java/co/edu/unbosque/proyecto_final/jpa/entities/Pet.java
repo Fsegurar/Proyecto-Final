@@ -42,8 +42,8 @@ public class Pet implements Serializable {
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     private Owner owner;
 
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)
-    private List<Visit> visits;
+    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Visit> visits = new ArrayList<>();
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)
     private List<PetCase> cases = new ArrayList<>();
@@ -71,10 +71,6 @@ public class Pet implements Serializable {
         petcase.setPet(this);
     }
 
-    public void addVisit(Visit visit) {
-        visits.add(visit);
-        visit.setPet(this);
-    }
 
     public String getSex() {
         return sex;

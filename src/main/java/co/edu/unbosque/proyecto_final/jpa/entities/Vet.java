@@ -25,8 +25,8 @@ public class Vet implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "vet")
-    private List<Visit> visits;
+    @OneToMany(mappedBy = "vet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Visit> visits= new ArrayList<>();
 
     @PreUpdate
     private void onUpdate(){
@@ -41,11 +41,6 @@ public class Vet implements Serializable {
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
-    }
-
-    public void addVisit(Visit visit) {
-        visits.add(visit);
-        visit.setVet(this);
     }
 
     public UserApp getUsername() {

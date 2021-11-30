@@ -1,7 +1,5 @@
 package co.edu.unbosque.proyecto_final.jpa.repositories;
 
-
-
 import co.edu.unbosque.proyecto_final.jpa.entities.Owner;
 import org.hibernate.Hibernate;
 
