@@ -32,4 +32,5 @@ public interface OwnerRepository {
     Optional<Owner> findByUserName(String username);
 
     Integer countByNeighborhood(String neighborhood);
+
 }

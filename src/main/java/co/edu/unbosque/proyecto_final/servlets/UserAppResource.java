@@ -24,23 +24,6 @@ public class UserAppResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(UserAppPOJO userapp){
 
-
-        /*UserAppPOJO userapp = new UserAppPOJO();
-        String username = request.getParameter("username");
-        String password1 = request.getParameter("password");
-        String email = request.getParameter("email");
-        String role = request.getParameter("role");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String neighborhood = request.getParameter("neighborhood");
-        if (role.equalsIgnoreCase("propietario")){
-            OwnerPOJO owner = new OwnerPOJO(name,address,neighborhood);
-             userapp = new UserAppPOJO(username,password1, email,role,owner);
-        }else {
-            VetPOJO vet = new VetPOJO(name,address,neighborhood);
-            userapp = new UserAppPOJO(username,password1,email,role,vet);
-        }*/
-
         Optional<UserAppPOJO> persistedUser = Optional.of(new UserAppService().saveUserApp(
                 userapp.getUsername(), userapp.getPassword(), userapp.getEmail(), userapp.getRole()));
 

@@ -193,6 +193,12 @@ public class PetRepositoryImpl implements PetRepository{
         }
         return Optional.empty();
     }
-
+    @Override
+    public Integer countBySpecies(String species) {
+        Long owner = entityManager.createQuery("SELECT count(*) FROM Pet b WHERE b.species = :species", Long.class)
+                .setParameter("species", species)
+                .getSingleResult();
+        return owner.intValue();
+    }
 
 }

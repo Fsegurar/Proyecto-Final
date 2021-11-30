@@ -275,4 +275,17 @@ public class PetService {
         return petPOJO;
     }
 
+    public Integer countBySpecies(String specie){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        petRepository = new PetRepositoryImpl(entityManager);
+
+        Integer petNum = petRepository.countBySpecies(specie);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return petNum;
+    }
+
 }

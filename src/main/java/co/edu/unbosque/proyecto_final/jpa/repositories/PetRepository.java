@@ -39,4 +39,6 @@ public interface PetRepository {
     Optional<Pet> editPictureByPetId(Integer pet_id,String picture);
 
     Optional<Pet> editMicrochipByPetId(Integer pet_id, String microchip);
+
+    Integer countBySpecies(String neighborhood);
 }

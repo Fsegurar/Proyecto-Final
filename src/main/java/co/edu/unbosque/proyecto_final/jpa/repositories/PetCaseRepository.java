@@ -19,5 +19,7 @@ public interface PetCaseRepository {
 
     Optional<PetCase> save(PetCase petCase);
 
+    Integer countByType(String type);
+
 
 }
