@@ -111,11 +111,41 @@
             </div>
         </nav>
         <div class="row">
-            <div class=" tabla col-sm-7" style="margin-top:30px">
-                <h4>localidades</h4>
-                <h5>casos</h5>
+            <div class="container" style="width: 593px;margin-right: 10px;margin-left: 70px;height: 350px;margin-top: 30px;padding-right: 0px;">
+                <div class="table-responsive tabla col-sm-6" style="/* margin:30px; */margin-right: 0px;width: 850px;">
+                    <h4>Propietarios</h4>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">A. NARINO</th>
+                            <th class="column-header">B. UNIDOS</th>
+                            <th class="column-header">BOSA</th>
+                            <th class="column-header">C. BOLIVAR</th>
+                            <th class="column-header">CHAPINERO</th>
+                            <th class="column-header">ENGATIVA</th>
+                            <th class="column-header">FONTIBON</th>
+                            <th class="column-header">KENNEDY</th>
+                            <th class="column-header">LA CANDELARIA</th>
+                            <th class="column-header">LOS MARTIRES</th>
+                            <th class="column-header">P. ARANDA</th>
+                            <th class="column-header">R. URIBE</th>
+                            <th class="column-header">SAN CRISTOBAL</th>
+                            <th class="column-header">SANTA FE</th>
+                            <th class="column-header">SUBA</th>
+                            <th class="column-header">SUMAPAZ</th>
+                            <th class="column-header">TEUSAQUILLO</th>
+                            <th class="column-header">TUNJUELITO</th>
+                            <th class="column-header">USAQUEN</th>
+                            <th class="column-header">USME</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body-table">
+                        </tbody>
+                    </table>
+                    <h5>casos</h5>
+                </div>
             </div>
-            <div class="imagenes col-sm-4" >
+            <div class="container col-sm-4" style="margin-top:30px;padding-left: 220px;">
                 <img id="dogimage" src="./Img/golden.jpg" class="rounded" alt="Cinque Terre" width="304" height="236">
                 <br/><br/>
                 <img id="catimage" src="./Img/gato.jpg" class="rounded" alt="Cinque Terre" width="304" height="236">
@@ -153,30 +183,41 @@
     <script>
 
         (function () {
-            var A_NARINO=0;
-            var B_UNIDOS=0;
-            var BOSA=0;
-            var C_BOLIVAR=0;
-            var CHAPINERO=0;
-            var ENGATIVA=0;
-            var FONTIBON=0;
-            var KENNEDY=0;
-            var LA_CANDELARIA=0;
-            var LOS_MARTIRES=0;
-            var P_ARANDA=0;
-            var R_URIBE=0;
-            var SAN_CRISTOBAL=0;
-            var SANTA_FE=0;
-            var SUBA=0;
-            var SUMAPAZ=0;
-            var TEUSAQUILLO=0;
-            var TUNJUELITO=0;
-            var USAQUEN=0;
-            var USME=0;
+
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owner/count')
                 .then(response => response.json())
                 .then(data => {
                     console.log(data)
+                    let tr = document.createElement("tr")
+                    let localidades = {
+                        A_NARINO : data.A_NARINO,
+                        B_UNIDOS : data.B_UNIDOS,
+                        BOSA : data.BOSA,
+                        C_BOLIVAR : data.C_BOLIVAR,
+                        CHAPINERO : data.CHAPINERO,
+                        ENGATIVA : data.ENGATIVA,
+                        FONTIBON : data.FONTIBON,
+                        KENNEDY : data.KENNEDY,
+                        LA_CANDELARIA : data.LA_CANDELARIA,
+                        LOS_MARTIRES : data.LOS_MARTIRES,
+                        P_ARANDA : data.P_ARANDA,
+                        R_URIBE : data.R_URIBE,
+                        SAN_CRISTOBAL : data.SAN_CRISTOBAL,
+                        SANTA_FE : data.SANTA_FE,
+                        SUBA : data.SUBA,
+                        SUMAPAZ : data.SUMAPAZ,
+                        TEUSAQUILLO : data.TEUSAQUILLO,
+                        TUNJUELITO : data.TUNJUELITO,
+                        USAQUEN : data.USAQUEN,
+                        USME : data.USME
+                    }
+                    Object.keys(localidades).forEach((key) => {
+                        let td = document.createElement("td");
+                        td.innerHTML = localidades[key];
+                        tr.appendChild(td);
+                    });
+                    document.getElementById("body-table").appendChild(tr);
+
                 })
         })();
 

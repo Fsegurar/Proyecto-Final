@@ -38,20 +38,20 @@ public class OwnerResource {
 
         Hashtable<String, Integer> ownersCount = new Hashtable<>();
 
-        ownersCount.put("A. NARINO",0);
-        ownersCount.put("B. UNIDOS",0);
+        ownersCount.put("A_NARINO",0);
+        ownersCount.put("B_UNIDOS",0);
         ownersCount.put("BOSA",0);
-        ownersCount.put("C. BOLIVAR",0);
+        ownersCount.put("C_BOLIVAR",0);
         ownersCount.put("CHAPINERO",0);
         ownersCount.put("ENGATIVA",0);
         ownersCount.put("FONTIBON",0);
         ownersCount.put("KENNEDY",0);
-        ownersCount.put("LA CANDELARIA",0);
-        ownersCount.put("LOS MARTIRES",0);
-        ownersCount.put("P. ARANDA",0);
-        ownersCount.put("R. URIBE",0);
-        ownersCount.put("SAN CRISTOBAL",0);
-        ownersCount.put("SANTA FE",0);
+        ownersCount.put("LA_CANDELARIA",0);
+        ownersCount.put("LOS_MARTIRES",0);
+        ownersCount.put("P_ARANDA",0);
+        ownersCount.put("R_URIBE",0);
+        ownersCount.put("SAN_CRISTOBAL",0);
+        ownersCount.put("SANTA_FE",0);
         ownersCount.put("SUBA",0);
         ownersCount.put("SUMAPAZ",0);
         ownersCount.put("TEUSAQUILLO",0);
