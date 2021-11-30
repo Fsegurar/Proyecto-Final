@@ -2,6 +2,8 @@ package co.edu.unbosque.proyecto_final.jpa.repositories;
 
 
 
+import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
+import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Visit;
 
 import javax.persistence.EntityManager;
@@ -52,9 +54,18 @@ public class VisitRepositoryImpl implements VisitRepository{
 
 
     @Override
-    public Optional<Visit> save(Visit visit) {
+    public Optional<Visit> save(Visit visit, String vet_id, Integer pet_id) {
         try {
             entityManager.getTransaction().begin();
+
+            VetRepository vetRepository = new VetRepositoryImpl(entityManager);
+
+            Vet vet = vetRepository.findByName(vet_id).get();
+            visit.setVet(vet);
+
+            Pet pet = entityManager.find(Pet.class, pet_id);
+            visit.setPet(pet);
+
             entityManager.persist(visit);
             entityManager.getTransaction().commit();
             return Optional.of(visit);

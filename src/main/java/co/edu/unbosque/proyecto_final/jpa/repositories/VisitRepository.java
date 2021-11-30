@@ -19,6 +19,6 @@ public interface VisitRepository {
 
     List<Visit> findAll();
 
-    Optional<Visit> save (Visit visit);
+    Optional<Visit> save (Visit visit, String vet_id, Integer pet_id);
 
 }

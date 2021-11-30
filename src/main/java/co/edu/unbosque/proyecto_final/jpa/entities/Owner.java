@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,8 +34,8 @@ public class Owner implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<Pet> pets;
+    @OneToMany(mappedBy = "owner")
+    private List<Pet> pets = new ArrayList<>();
 
     @PreUpdate
     private void onUpdate(){

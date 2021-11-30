@@ -24,12 +24,15 @@ public class Visit implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "vet_id", referencedColumnName = "name", unique = true)
+    @JoinColumn(name = "vet_id", referencedColumnName = "name")
     private Vet vet;
 
     @ManyToOne
-    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
+    @JoinColumn(name = "pet_id")
     private Pet pet;
+
+    @PrePersist
+    private void onPersist(){pet.getOwner().setPets(null);}
 
     public Visit(){}
 
