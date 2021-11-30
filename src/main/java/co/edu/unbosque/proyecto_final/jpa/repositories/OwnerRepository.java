@@ -30,4 +30,6 @@ public interface OwnerRepository {
     Optional<Owner> editNeighborhoodByUsername(String username,String neighborhood);
 
     Optional<Owner> findByUserName(String username);
+
+    Integer countByNeighborhood(String neighborhood);
 }

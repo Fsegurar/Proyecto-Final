@@ -120,4 +120,12 @@ public class OwnerRepositoryImpl implements OwnerRepository{
 
         return owner!=null ? Optional.of(owner) : Optional.empty();
     }
+
+    @Override
+    public Integer countByNeighborhood(String neighborhood) {
+        Long owner = entityManager.createQuery("SELECT count(*) FROM Owner b WHERE b.neighborhood = :neighborhood", Long.class)
+                .setParameter("neighborhood", neighborhood)
+                .getSingleResult();
+        return owner.intValue();
+    }
 }

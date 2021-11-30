@@ -160,10 +160,10 @@
             var CHAPINERO=0;
             var ENGATIVA=0;
             var FONTIBON=0;
-           var KENNEDY0=0;
+            var KENNEDY=0;
             var LA_CANDELARIA=0;
             var LOS_MARTIRES=0;
-             var P_ARANDA=0;
+            var P_ARANDA=0;
             var R_URIBE=0;
             var SAN_CRISTOBAL=0;
             var SANTA_FE=0;
@@ -173,8 +173,13 @@
             var TUNJUELITO=0;
             var USAQUEN=0;
             var USME=0;
-            fetch()
-        });
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owner/count')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+        })();
+
         //Checks if the login is done
         if(document.cookie.length===0){
             window.location.href = location.href.replace("funcionario.html","");

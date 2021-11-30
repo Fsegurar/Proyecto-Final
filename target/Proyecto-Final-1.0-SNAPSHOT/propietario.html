@@ -115,7 +115,7 @@
             <img src="./Img/pata.png" style="margin-left:20px" width="75" height="75">
             <a class="navbar-brand" style="margin-left:20px">Bienvenid@</a>
             <b class="text-secondary">   Este es el formulario que debe diligenciar para registrar una nueva mascota</b>
-
+            <button class="btn btn-secondary" id="edit-button">Editar</button>
             <button class="btn btn-secondary" id="logout-button">Logout</button>
         </nav>
         <div class="container" style="margin-left: 10px">
@@ -220,7 +220,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2  class="modal-title">Este Formulario permite editar su mascota</h2>
+                        <h2  class="modal-title">Este Formulario permite editar su localidad y direccion</h2>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -254,60 +254,9 @@
                             <label  class="mb-2 mr-sm-2">Direccion:</label>
                             <input id="address-edit" type="text" class="form-control mb-2 mr-sm-2" placeholder="Direccion"/>
                         </div>
-                        <div class="form-group">
-                            <label id="lable-m" > Numero de Microchip de la mascota:</label>
-                            <input id="microchip-edit" type="number" min="0" max="10000000000000" class="form-control mb-2 mr-sm-2" placeholder="Microchip" name="petname"/>
-                        </div>
                         <div class="modal-footer">
                             <button id="save-edit1" type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
                             <button id="close-edit1" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal " id="case2">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2  class="modal-title">Este Formulario permite editar su mascota</h2>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label  class="mb-2 mr-sm-2">Localidad:</label>
-                            <select id="neightbor-edit2">
-                                <option></option>
-                                <option>A. NARINO</option>
-                                <option>B. UNIDOS</option>
-                                <option>BOSA</option>
-                                <option>C. BOLIVAR</option>
-                                <option>CHAPINERO</option>
-                                <option>ENGATIVA</option>
-                                <option>FONTIBON</option>
-                                <option>KENNEDY</option>
-                                <option>LA CANDELARIA</option>
-                                <option>LOS MARTIRES</option>
-                                <option>P. ARANDA</option>
-                                <option>R. URIBE</option>
-                                <option>SAN CRISTOBAL</option>
-                                <option>SANTA FE</option>
-                                <option>SUBA</option>
-                                <option>SUMAPAZ</option>
-                                <option>TEUSAQUILLO</option>
-                                <option>TUNJUELITO</option>
-                                <option>USAQUEN</option>
-                                <option>USME</option>
-                            </select>
-
-                        </div>
-                        <div class="form-group">
-                            <label  class="mb-2 mr-sm-2">Direccion:</label>
-                            <input id="address2-edit" type="text" class="form-control mb-2 mr-sm-2" placeholder="Direccion"/>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="save-edit2" type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
-                            <button id="close-edit2" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -373,7 +322,6 @@
             });
 
         const case1 = document.getElementById("case1");
-        const case2 = document.getElementById("case2");
 
         (function ()  {
             let user;
@@ -388,7 +336,9 @@
                 .then(data => {
                     console.log(data);
                     document.cookie = "person_id=" + data.person_id;
-
+                    document.cookie = "email="+data.email;
+                    document.cookie = "name="+data.name;
+                    document.cookie = "address="+dat.address;
                     document.cookie = "neighborhood=" + data.neighborhood;
                 });
 
@@ -490,9 +440,7 @@
             fetch('multiPartServlet', {
                 method: 'POST',
                 body: info,
-                /*headers: {
-                    'Content-type': 'multipart/form-data; charset=UTF-8'
-                }*/
+
             })
             event.stopPropagation();
             //window.location.reload();
@@ -510,19 +458,6 @@
             case1.className="modal fade";
         };
 
-        document.getElementById("save-edit2").onclick= function(){
-            let id = document.getElementById("lable-m").getAttribute("class")
-            document.getElementById("lable-m").removeAttribute("class")
-            case2.style.display = "none";
-            case2.className="modal fade";
-
-        };
-        document.getElementById("close-edit2").onclick=function() {
-            case2.style.display = "none";
-            case2.className="modal fade";
-        };
-
-
 
         document.getElementById("petspecies-input").onclick = function(){
             let raza =document.getElementById("petspecies-input").value;
@@ -536,6 +471,59 @@
                 document.getElementById("dograza-input").setAttribute("disabled",true)
             }
         };
+        let editar = document.getElementById("edit-button");
+        editar.onclick  = function() {
+            console.log("se leyo editar 1")
+            case1.style.display = "block";
+            case1.style.paddingRight = "17px";
+            case1.className="modal fade show";
+            for (let i = 0; i < cookies.length; i++) {
+                if (cookies[i].includes("address=")) {
+                   let address = cookies[i].split("=")[1];
+                    document.getElementById("address-edit").setAttribute("value",address);
+                }
+                if (cookies[i].includes("neighborhood=")) {
+                    let neight = cookies[i].split("=")[1];
+                    document.getElementById("neightbor-edit").setAttribute("value",neight);
+                }
+
+            }
+
+
+        };
+
+        let guardar = document.getElementById("save-edit1");
+        guardar.onclick = function (){
+            let name;
+            let correo;
+            let user;
+            for (let i = 0; i < cookies.length; i++) {
+                if (cookies[i].includes("name=")) {
+                    name = cookies[i].split("=")[1];
+                }
+                if (cookies[i].includes("email=")) {
+                    correo = cookies[i].split("=")[1];
+                }
+                if (cookies[i].includes("username")) {
+                    user = cookies[i].split("=")[1];
+                }
+            }
+            let owner ={
+                email : correo,
+                owner: {
+                    name : name,
+                    address : document.getElementById("address-edit").value,
+                    neighborhood : document.getElementById("neightbor-edit").value
+                }
+            }
+            fetch('http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/'+user, {
+                method: 'POST',
+                body: JSON.stringify(owner),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }
+            })
+        }
 
         function getCookie(name) {
             const value = `; ${document.cookie}`;

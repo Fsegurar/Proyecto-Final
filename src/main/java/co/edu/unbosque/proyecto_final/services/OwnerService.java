@@ -208,4 +208,17 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(name,address,neighborhood);
         return ownerPOJO;
     }
+
+    public Integer countByNeighborhood(String neighborhood){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        ownerRepository = new OwnerRepositoryImpl(entityManager);
+
+        Integer ownerNum = ownerRepository.countByNeighborhood(neighborhood);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return ownerNum;
+    }
 }
