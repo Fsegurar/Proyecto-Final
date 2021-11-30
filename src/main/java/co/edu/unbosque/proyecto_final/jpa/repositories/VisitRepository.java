@@ -21,4 +21,5 @@ public interface VisitRepository {
 
     Optional<Visit> save (Visit visit, String vet_id, Integer pet_id);
 
+    Integer countByType(String type);
 }

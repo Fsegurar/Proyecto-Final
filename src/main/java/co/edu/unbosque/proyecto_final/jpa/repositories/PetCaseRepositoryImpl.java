@@ -57,11 +57,5 @@ public class PetCaseRepositoryImpl implements PetCaseRepository{
         }
         return Optional.empty();
     }
-    @Override
-    public Integer countByType(String type) {
-        Long owner = entityManager.createQuery("SELECT count(*) FROM PetCase b WHERE b.type = :type", Long.class)
-                .setParameter("type", type)
-                .getSingleResult();
-        return owner.intValue();
-    }
+
 }

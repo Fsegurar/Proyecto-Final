@@ -3,10 +3,7 @@ package co.edu.unbosque.proyecto_final.services;
 import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Visit;
-import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepository;
-import co.edu.unbosque.proyecto_final.jpa.repositories.UserAppRepositoryImpl;
-import co.edu.unbosque.proyecto_final.jpa.repositories.VisitRepository;
-import co.edu.unbosque.proyecto_final.jpa.repositories.VisitRepositoryImpl;
+import co.edu.unbosque.proyecto_final.jpa.repositories.*;
 import co.edu.unbosque.proyecto_final.servlets.pojos.VisitPOJO;
 
 import javax.ejb.Stateless;
@@ -116,5 +113,18 @@ public class VisitService {
         }else {
             return  null;
         }
+    }
+
+    public Integer countByType(String type){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        visitRepository = new VisitRepositoryImpl(entityManager);
+
+        Integer petCaseNum = visitRepository.countByType(type);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return petCaseNum;
     }
 }

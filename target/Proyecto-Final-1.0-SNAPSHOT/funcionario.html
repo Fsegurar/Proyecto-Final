@@ -163,6 +163,37 @@
                         <tbody id="body3-table">
                         </tbody>
                     </table>
+                    <h4>Visitas Total</h4>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">Esterilizacion</th>
+                            <th class="column-header">Implantacion de Microchip</th>
+                            <th class="column-header">Vacunacion</th>
+                            <th class="column-header">desparacitacion</th>
+                            <th class="column-header">Urgencia</th>
+                            <th class="column-header">Control</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body4-table">
+                        </tbody>
+                    </table>
+                    <h4>Visitas pr Veterinaria</h4>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">Veterinaria</th>
+                            <th class="column-header">Esterilizacion</th>
+                            <th class="column-header">Implantacion de Microchip</th>
+                            <th class="column-header">Vacunacion</th>
+                            <th class="column-header">desparacitacion</th>
+                            <th class="column-header">Urgencia</th>
+                            <th class="column-header">Control</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body5-table">
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="container col-sm-4" style="margin-top:30px;padding-left: 220px;">
@@ -278,6 +309,46 @@
                     tr.appendChild(tdgato)
                     document.getElementById("body3-table").appendChild(tr);
                 })
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count')
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data);
+                    let tr = document.createElement("tr");
+                    let visitas ={
+                        Esterilizacion: data.Esterilizacion,
+                        chip : data.Implantacion_de_Microchip,
+                        Vacunacion : data.Vacunacion,
+                        desparacitacion : data.desparacitacion,
+                        Urgencia : data.Urgencia,
+                        Control : data.Control
+                    }
+                    Object.keys(visitas).forEach((key) => {
+                        let td = document.createElement("td");
+                        td.innerHTML = visitas[key];
+                        tr.appendChild(td);
+                    });
+                    document.getElementById("body4-table").appendChild(tr);
+                })
+            let vets = [];
+            let vists = [];
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/vets')
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data);
+                    vets = data;
+                })
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/visits')
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data);
+                    vists = data;
+                })
+           /* for(var i =0;i<vets.length;i++){
+                let tr = document.createElement("tr");
+                if()
+
+            }*/
+
         })();
 
         //Checks if the login is done

@@ -112,18 +112,7 @@ public class PetCaseService {
         }
     }
 
-    public Integer countByType(String type){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        petCaseRepository = new PetCaseRepositoryImpl(entityManager);
 
-        Integer petCaseNum = petCaseRepository.countByType(type);
-
-        entityManager.close();
-        entityManagerFactory.close();
-
-        return petCaseNum;
-    }
 }
 
 

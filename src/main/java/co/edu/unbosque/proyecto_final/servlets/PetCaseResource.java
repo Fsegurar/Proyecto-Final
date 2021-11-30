@@ -33,31 +33,5 @@ public class PetCaseResource {
         }
     }
 
-    @GET
-    @Path("/petcase/count")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPetsCountBySpecies() {
 
-        Hashtable<String, Integer> petCasesCount = new Hashtable<>();
-        petCasesCount.put("Esterilizacion",0);
-        petCasesCount.put("Implantacion_de_Microchip",0);
-        petCasesCount.put("Vacunacion",0);
-        petCasesCount.put("desparacitacion",0);
-        petCasesCount.put("Urgencia",0);
-        petCasesCount.put("Control",0);
-
-        petCasesCount.forEach((k, v) -> {
-            v = new PetCaseService().countByType(k);
-            petCasesCount.replace(k,v);
-        });
-
-        if (!petCasesCount.isEmpty()) {
-            return Response.status(Response.Status.OK)
-                    .entity(petCasesCount)
-                    .build();
-        } else {
-            return Response.status(400)
-                    .build();
-        }
-    }
 }

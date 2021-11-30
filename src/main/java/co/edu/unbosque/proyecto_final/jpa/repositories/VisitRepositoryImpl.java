@@ -75,4 +75,12 @@ public class VisitRepositoryImpl implements VisitRepository{
         return Optional.empty();
     }
 
+    @Override
+    public Integer countByType(String type) {
+        Long owner = entityManager.createQuery("SELECT count(*) FROM Visit b WHERE b.type = :type", Long.class)
+                .setParameter("type", type)
+                .getSingleResult();
+        return owner.intValue();
+    }
+
 }
