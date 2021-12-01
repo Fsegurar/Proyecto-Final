@@ -90,17 +90,18 @@ public class VisitResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVisitsCountByVet() {
 
+        Hashtable<Vet, Integer> visits = new Hashtable<>();
         Hashtable<String, Integer> visitsCount = new Hashtable<>();
 
-        List<VetPOJO> vets = new VetService().listVets();
+        List<Vet> vets = new VetService().listVets();
 
         vets.forEach((vet) -> {
-            visitsCount.put(vet.getName(), 0);
+            visits.put(vet, 0);
         });
 
-        visitsCount.forEach((k, v) -> {
+        visits.forEach((k, v) -> {
             v = new VisitService().countByVetName(k);
-            visitsCount.replace(k,v);
+            visitsCount.put(k.getName(),v);
         });
 
         if (!visitsCount.isEmpty()) {

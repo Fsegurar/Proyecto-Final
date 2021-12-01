@@ -2,6 +2,7 @@ package co.edu.unbosque.proyecto_final.jpa.repositories;
 
 
 
+import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Visit;
 
 import java.util.List;
@@ -23,5 +24,5 @@ public interface VisitRepository {
 
     Integer countByType(String type);
 
-    Integer countByVetName(String vetName);
+    Integer countByVetName(Vet vet_id);
 }

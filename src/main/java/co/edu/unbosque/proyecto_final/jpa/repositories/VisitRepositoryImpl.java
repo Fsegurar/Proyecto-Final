@@ -84,8 +84,9 @@ public class VisitRepositoryImpl implements VisitRepository{
     }
 
     @Override
-    public Integer countByVetName(String vetName) {
-        Long visit = entityManager.createQuery("SELECT count(*) FROM Visit b WHERE b.vet_id = :vetName", Long.class)
+    public Integer countByVetName(Vet vet_id) {
+        Long visit = entityManager.createQuery("SELECT count(*) FROM Visit b WHERE b.vet_id = :vet_id", Long.class)
+                .setParameter("vet_id", vet_id)
                 .getSingleResult();
         return visit.intValue();
     }

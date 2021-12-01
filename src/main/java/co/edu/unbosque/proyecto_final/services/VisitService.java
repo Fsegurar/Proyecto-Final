@@ -1,5 +1,6 @@
 package co.edu.unbosque.proyecto_final.services;
 
+import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Visit;
 import co.edu.unbosque.proyecto_final.jpa.repositories.*;
 import co.edu.unbosque.proyecto_final.servlets.pojos.VisitPOJO;
@@ -126,7 +127,7 @@ public class VisitService {
         return petCaseNum;
     }
 
-    public Integer countByVetName(String vetName) {
+    public Integer countByVetName(Vet vetName) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         visitRepository = new VisitRepositoryImpl(entityManager);

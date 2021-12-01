@@ -137,7 +137,7 @@ public class VetService {
         return persistedVet;
     }
 
-    public List<VetPOJO> listVets(){
+    public List<Vet> listVets(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -150,13 +150,13 @@ public class VetService {
         List<VetPOJO> vetPOJO = new ArrayList<>();
         for (Vet vet : vets){
             vetPOJO.add(new VetPOJO(
-                    vet.getUserapp().getUsername(),
+                    //vet.getUserapp().getUsername(),
                     vet.getName(),
                     vet.getAddress(),
                     vet.getNeighborhood()
             ));
         }
-        return vetPOJO;
+        return vets;
     }
 
     public VetPOJO saveVet(String username, String name, String address, String neighborhood){
