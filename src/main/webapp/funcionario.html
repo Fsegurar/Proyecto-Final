@@ -183,12 +183,6 @@
                         <thead class="thead-dark col-sm-6">
                         <tr>
                             <th class="column-header">Veterinaria</th>
-                            <th class="column-header">Esterilizacion</th>
-                            <th class="column-header">Implantacion de Microchip</th>
-                            <th class="column-header">Vacunacion</th>
-                            <th class="column-header">Desparacitacion</th>
-                            <th class="column-header">Urgencia</th>
-                            <th class="column-header">Control</th>
                         </tr>
                         </thead>
                         <tbody id="body5-table">
@@ -318,7 +312,7 @@
                         Esterilizacion: data.Esterilizacion,
                         chip : data.Implantacion_de_Microchip,
                         Vacunacion : data.Vacunacion,
-                        desparacitacion : data.desparacitacion,
+                        Desparacitacion : data.Desparacitacion,
                         Urgencia : data.Urgencia,
                         Control : data.Control
                     }
@@ -333,7 +327,19 @@
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count/vet')
                 .then(response => response.json())
                 .then(data =>{
-                    console.log(data)
+                    let tr = document.createElement("tr");
+                    let th = document.createElement("th");
+                    let tr1 = document.createElement("tr");
+                    Object.keys(data).forEach((key) =>{
+                        th.innerHTML = key;
+
+                        let td = document.createElement("td");
+                        td.innerHTML = data[key];
+                        tr.appendChild(th);
+                        tr1.appendChild(td);
+                    });
+                    document.getElementById("body5-table").appendChild(tr);
+                    document.getElementById("body5-table").appendChild(tr1);
                 })
 
             let vets = [];
