@@ -1,7 +1,5 @@
 package co.edu.unbosque.proyecto_final.jpa.entities;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -25,7 +23,7 @@ public class Visit implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "vet_id", referencedColumnName = "name")
-    private Vet vet;
+    private Vet vet_id;
 
     @ManyToOne
     @JoinColumn(name = "pet_id")
@@ -74,12 +72,12 @@ public class Visit implements Serializable {
         this.description = description;
     }
 
-    public Vet getVet() {
-        return vet;
+    public Vet getVet_id() {
+        return vet_id;
     }
 
-    public void setVet(Vet vet) {
-        this.vet = vet;
+    public void setVet_id(Vet vet) {
+        this.vet_id = vet;
     }
 
     public Pet getPet() {

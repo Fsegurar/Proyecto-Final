@@ -1,7 +1,5 @@
 package co.edu.unbosque.proyecto_final.jpa.entities;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class Vet implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "vet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vet_id")
     private List<Visit> visits= new ArrayList<>();
 
     @PreUpdate

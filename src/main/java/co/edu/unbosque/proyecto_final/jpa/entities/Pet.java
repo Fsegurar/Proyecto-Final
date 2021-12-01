@@ -42,7 +42,7 @@ public class Pet implements Serializable {
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     private Owner owner;
 
-    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pet" )
     private List<Visit> visits = new ArrayList<>();
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)

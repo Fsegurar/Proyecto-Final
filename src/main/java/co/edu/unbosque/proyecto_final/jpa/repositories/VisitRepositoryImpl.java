@@ -33,9 +33,9 @@ public class VisitRepositoryImpl implements VisitRepository{
     }
 
     @Override
-    public Optional<Visit> findByVet(String vet_name) {
-        Visit visit = entityManager.createQuery("SELECT b FROM Visit b WHERE b.vet = :vet_name", Visit.class)
-                .setParameter("vet_name", vet_name)
+    public Optional<Visit> findByVetName(String vet_id) {
+        Visit visit = entityManager.createQuery("SELECT b FROM Visit b WHERE b.vet_id = :vet_id", Visit.class)
+                .setParameter("vet_id", vet_id)
                 .getSingleResult();
         return visit != null ? Optional.of(visit) : Optional.empty();
     }
@@ -61,7 +61,7 @@ public class VisitRepositoryImpl implements VisitRepository{
             VetRepository vetRepository = new VetRepositoryImpl(entityManager);
 
             Vet vet = vetRepository.findByName(vet_id).get();
-            visit.setVet(vet);
+            visit.setVet_id(vet);
 
             Pet pet = entityManager.find(Pet.class, pet_id);
             visit.setPet(pet);

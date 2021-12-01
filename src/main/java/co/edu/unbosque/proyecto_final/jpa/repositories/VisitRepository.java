@@ -13,7 +13,7 @@ public interface VisitRepository {
 
     Optional<Visit> findByType(String type);
 
-    Optional<Visit> findByVet(String vet_name);
+    Optional<Visit> findByVetName(String vet_name);
 
     Optional<Visit> findByPetId(Integer pet_id);
 

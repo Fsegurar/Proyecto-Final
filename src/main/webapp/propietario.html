@@ -196,12 +196,14 @@
                         <thead class="thead-dark">
                         <tr>
                             <th class="column-header">Foto</th>
+                            <th class="column-header">Id</th>
                             <th class="column-header">Nombre de la mascota</th>
                             <th class="column-header">Numero de Microchip de la mascota</th>
                             <th class="column-header">Especie</th>
                             <th class="column-header">Sexo</th>
                             <th class="column-header">Tamaño</th>
                             <th class="column-header">Localidad</th>
+                            <th class="column-header">Acciones</th>
                         </tr>
                         </thead>
                         <tbody id="body-table">
@@ -262,6 +264,61 @@
                 </div>
             </div>
         </div>
+        <div class="modal" id="case2">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2  class="modal-title">Este Formulario permite editar su Mascota</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Id de la mascota:</label>
+
+                        </div>
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Nombre de la mascota:</label>
+                        </div>
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Especie:</label>
+                        </div>
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Raza:</label>
+                        </div>
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Tamaño:</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="save-edit2" type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                            <button id="close-edit2" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="case3">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2  class="modal-title">Ingresar nuevo caso</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Id de la mascota:</label>
+                        </div>
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Tipo:</label>
+                        </div>
+                        <div class="form-group">
+                            <label  class="mb-2 mr-sm-2">Descripcion:</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="save-edit3" type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                            <button id="close-edit3" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <button class="open-button" onclick="openChat();">Chat</button>
         <div class="chat-popup" id="myChat">
             <table class="table-container">
@@ -297,7 +354,7 @@
             document.cookie = "Rol = ; expires = "+Date();
             document.cookie = "username = ; expires = "+Date();
             window.location.href = location.href.replace("propietario.html","");
-        }
+        };
         fetch('https://dog.ceo/api/breeds/list/all')
             .then(response => response.json())
             .then(data => {
@@ -322,6 +379,8 @@
             });
 
         const case1 = document.getElementById("case1");
+        const case2 = document.getElementById("case2");
+        const case3 = document.getElementById("case3");
 
         (function ()  {
             let user;
@@ -338,7 +397,7 @@
                     document.cookie = "person_id=" + data.person_id;
                     document.cookie = "email="+data.email;
                     document.cookie = "name="+data.name;
-                    document.cookie = "address="+dat.address;
+                    document.cookie = "address="+data.address;
                     document.cookie = "neighborhood=" + data.neighborhood;
                 });
 
@@ -373,6 +432,7 @@
                             tdimg.appendChild(img);
                             tr.appendChild(tdimg);
                             let pets = {
+                                idnum: pet.pet_id,
                                 petname: pet.name,
                                 microchipnum: pet.microchip,
                                 petspecie: pet.species,
@@ -385,7 +445,38 @@
                                 td.innerHTML = pets[key];
                                 tr.appendChild(td);
                             });
+                            let tdActions = document.createElement("td");
+
+                            let input = document.createElement("input");
+                            input.setAttribute("id", "delete-" + (rowId+1));
+                            input.setAttribute("type", "button");
+                            input.value = "Nuevo Caso";
+                            input.onclick = function() {
+                                case3.style.display = "block";
+                                case3.style.paddingRight = "17px";
+                                case3.className="modal fade show";
+                            };
+
+                            tdActions.appendChild(input);
+
+                            let inputeditar = document.createElement("input");
+                            inputeditar.setAttribute("id", "editar-" + (rowId+1));
+                            inputeditar.setAttribute("type", "button");
+                            inputeditar.setAttribute("data-toggle","modal" )
+                            inputeditar.value = "Editar";
+
+
+                            inputeditar.onclick = function() {
+                                console.log("se leyo editar 1")
+                                case2.style.display = "block";
+                                case2.style.paddingRight = "17px";
+                                case2.className="modal fade show";
+                            }
+                            tdActions.appendChild(inputeditar);
+                            tr.appendChild(tdActions);
                             document.getElementById("body-table").appendChild(tr);
+
+                           rowId++;
                         }
                     });
 
@@ -442,8 +533,7 @@
                 body: info,
 
             })
-            event.stopPropagation();
-            //window.location.reload();
+            rowId++;
         }
 
         document.getElementById("save-edit1").onclick= function(){
@@ -477,18 +567,6 @@
             case1.style.display = "block";
             case1.style.paddingRight = "17px";
             case1.className="modal fade show";
-            for (let i = 0; i < cookies.length; i++) {
-                if (cookies[i].includes("address=")) {
-                   let address = cookies[i].split("=")[1];
-                    document.getElementById("address-edit").setAttribute("value",address);
-                }
-                if (cookies[i].includes("neighborhood=")) {
-                    let neight = cookies[i].split("=")[1];
-                    document.getElementById("neightbor-edit").setAttribute("value",neight);
-                }
-
-            }
-
 
         };
 
@@ -523,13 +601,6 @@
                     'Content-type': 'application/json; charset=UTF-8'
                 }
             })
-        }
-
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2)
-                return parts.pop().split(';').shift();
         }
         //Chat Management
         var ws;

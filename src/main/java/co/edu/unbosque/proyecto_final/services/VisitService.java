@@ -1,7 +1,5 @@
 package co.edu.unbosque.proyecto_final.services;
 
-import co.edu.unbosque.proyecto_final.jpa.entities.Pet;
-import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 import co.edu.unbosque.proyecto_final.jpa.entities.Visit;
 import co.edu.unbosque.proyecto_final.jpa.repositories.*;
 import co.edu.unbosque.proyecto_final.servlets.pojos.VisitPOJO;
@@ -51,7 +49,7 @@ public class VisitService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         visitRepository = new VisitRepositoryImpl(entityManager);
-        Visit persistedVisit = visitRepository.findByVet(vet_name).get();
+        Visit persistedVisit = visitRepository.findByVetName(vet_name).get();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -89,7 +87,7 @@ public class VisitService {
                     visit.getCreated_at(),
                     visit.getType(),
                     visit.getDescription(),
-                    visit.getVet().getName(),
+                    visit.getVet_id().getName(),
                     visit.getPet().getPet_id()
             ));
         }
@@ -108,7 +106,7 @@ public class VisitService {
             entityManager.close();
             entityManagerFactory.close();
 
-            VisitPOJO visitPOJO = new VisitPOJO(persistedVisit.get().getVisit_id(),created_at, type, description, persistedVisit.get().getPet(), persistedVisit.get().getVet());
+            VisitPOJO visitPOJO = new VisitPOJO(persistedVisit.get().getVisit_id(),created_at, type, description, persistedVisit.get().getPet(), persistedVisit.get().getVet_id());
             return visitPOJO;
         }else {
             return  null;

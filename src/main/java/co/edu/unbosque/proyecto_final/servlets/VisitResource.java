@@ -38,9 +38,24 @@ public class VisitResource {
     }
 
     @GET
+    @Path("/visits/{vet_name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getVisitsByVetName(@PathParam("vet_name") String vet_name) {
+        Optional persistVisit = Optional.of(new VisitService().findByVet(vet_name));
+
+        if (persistVisit.isPresent()) {
+            return Response.status(Response.Status.OK)
+                    .entity(persistVisit.get())
+                    .build();
+        } else {
+            return Response.status(400)
+                    .build();
+        }
+    }
+    @GET
     @Path("/visits/count")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPetsCountBySpecies() {
+    public Response getVisitsCountByType() {
 
         Hashtable<String, Integer> visitsCount = new Hashtable<>();
         visitsCount.put("Esterilizacion",0);
