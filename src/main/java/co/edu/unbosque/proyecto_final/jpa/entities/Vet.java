@@ -7,12 +7,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "Vet")
+@NamedQueries({
+        @NamedQuery(name = "Vet.findByUserName",
+                query = "SELECT a FROM Vet a JOIN FETCH a.userapp u WHERE u.username = :username")
+})
 public class Vet implements Serializable {
 
     @Id
-    @OneToOne
-    @JoinColumn(name = "username")
-    private UserApp username;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "username",referencedColumnName = "username")
+    private UserApp userapp;
 
     @Column(name = "name")
     private String name;
@@ -41,12 +45,12 @@ public class Vet implements Serializable {
         this.neighborhood = neighborhood;
     }
 
-    public UserApp getUsername() {
-        return username;
+    public UserApp getUserapp() {
+        return userapp;
     }
 
-    public void setUsername(UserApp userapp) {
-        this.username = userapp;
+    public void setUserapp(UserApp userapp) {
+        this.userapp = userapp;
     }
 
     public String getName() {

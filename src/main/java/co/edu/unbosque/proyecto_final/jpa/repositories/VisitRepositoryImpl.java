@@ -49,7 +49,7 @@ public class VisitRepositoryImpl implements VisitRepository{
     }
 
     @Override
-    public List<Visit> findAll() {return entityManager.createQuery("from UserApp ").getResultList();
+    public List<Visit> findAll() {return entityManager.createQuery("from Visit ").getResultList();
     }
 
 

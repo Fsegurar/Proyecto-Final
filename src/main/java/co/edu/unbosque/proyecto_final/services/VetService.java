@@ -34,7 +34,7 @@ public class VetService {
         entityManagerFactory.close();
 
         Vet vet = findByUsername(username);
-        VetPOJO vetPOJO = new VetPOJO(vet.getUsername().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
+        VetPOJO vetPOJO = new VetPOJO(vet.getUserapp().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
 
         return vetPOJO;
     }
@@ -49,7 +49,7 @@ public class VetService {
         entityManagerFactory.close();
 
         Vet vet = findByUsername(username);
-        VetPOJO vetPOJO = new VetPOJO(vet.getUsername().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
+        VetPOJO vetPOJO = new VetPOJO(vet.getUserapp().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
 
         return vetPOJO;
     }
@@ -63,7 +63,7 @@ public class VetService {
         entityManagerFactory.close();
 
         Vet vet = findByUsername(username);
-        VetPOJO vetPOJO = new VetPOJO(vet.getUsername().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
+        VetPOJO vetPOJO = new VetPOJO(vet.getUserapp().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
 
         return vetPOJO;
     }
@@ -103,13 +103,8 @@ public class VetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
-        Vet persistedVet=null;
-        List<Vet> vets = vetRepository.findAll();
-        for (Vet vet : vets) {
-            if(vet.getUsername().getUsername().equals(username)){
-                persistedVet = vet;
-            }
-        }
+        Vet persistedVet= vetRepository.findByUserName(username).get();
+
         entityManager.close();
         entityManagerFactory.close();
 
@@ -155,7 +150,7 @@ public class VetService {
         List<VetPOJO> vetPOJO = new ArrayList<>();
         for (Vet vet : vets){
             vetPOJO.add(new VetPOJO(
-                    vet.getUsername().getUsername(),
+                    vet.getUserapp().getUsername(),
                     vet.getName(),
                     vet.getAddress(),
                     vet.getNeighborhood()
@@ -174,7 +169,7 @@ public class VetService {
         Optional<UserApp> user = userRepository.findByUsername(username);
         user.ifPresent(u ->{
             Vet vet = new Vet(name,address,neighborhood);
-            vet.setUsername(user.get());
+            vet.setUserapp(user.get());
             u.setVet(vet);
             userRepository.save(u);
         });

@@ -32,7 +32,7 @@ public class VetRepositoryImpl implements VetRepository{
 
     @Override
     public Optional<Vet> findByUserName(String username) {
-        Vet vet = entityManager.createQuery("SELECT b FROM Vet b WHERE b.username = :username", Vet.class)
+        Vet vet = entityManager.createNamedQuery("Vet.findByUserName",Vet.class)
                 .setParameter("username", username)
                 .getSingleResult();
         return vet != null ? Optional.of(vet) : Optional.empty();

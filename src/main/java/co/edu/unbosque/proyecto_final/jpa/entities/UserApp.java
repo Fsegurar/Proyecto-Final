@@ -26,7 +26,7 @@ public class UserApp {
     @OneToOne(mappedBy = "userapp", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Owner owner;
 
-    @OneToOne(mappedBy = "username", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "userapp", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Vet vet;
 
     @PreUpdate
