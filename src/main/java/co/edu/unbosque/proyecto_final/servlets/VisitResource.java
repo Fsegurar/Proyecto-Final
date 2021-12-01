@@ -1,15 +1,20 @@
 package co.edu.unbosque.proyecto_final.servlets;
 
 
+import co.edu.unbosque.proyecto_final.jpa.entities.Vet;
 import co.edu.unbosque.proyecto_final.services.PetCaseService;
 import co.edu.unbosque.proyecto_final.services.PetService;
+import co.edu.unbosque.proyecto_final.services.VetService;
 import co.edu.unbosque.proyecto_final.services.VisitService;
+import co.edu.unbosque.proyecto_final.servlets.pojos.VetPOJO;
 import co.edu.unbosque.proyecto_final.servlets.pojos.VisitPOJO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.ClientInfoStatus;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Optional;
 
 @Path("users")
@@ -61,12 +66,40 @@ public class VisitResource {
         visitsCount.put("Esterilizacion",0);
         visitsCount.put("Implantacion_de_Microchip",0);
         visitsCount.put("Vacunacion",0);
-        visitsCount.put("desparacitacion",0);
+        visitsCount.put("Desparacitacion",0);
         visitsCount.put("Urgencia",0);
         visitsCount.put("Control",0);
 
         visitsCount.forEach((k, v) -> {
             v = new VisitService().countByType(k);
+            visitsCount.replace(k,v);
+        });
+
+        if (!visitsCount.isEmpty()) {
+            return Response.status(Response.Status.OK)
+                    .entity(visitsCount)
+                    .build();
+        } else {
+            return Response.status(400)
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("/visits/count/vet")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getVisitsCountByVet() {
+
+        Hashtable<String, Integer> visitsCount = new Hashtable<>();
+
+        List<VetPOJO> vets = new VetService().listVets();
+
+        vets.forEach((vet) -> {
+            visitsCount.put(vet.getName(), 0);
+        });
+
+        visitsCount.forEach((k, v) -> {
+            v = new VisitService().countByVetName(k);
             visitsCount.replace(k,v);
         });
 

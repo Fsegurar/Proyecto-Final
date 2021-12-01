@@ -125,4 +125,17 @@ public class VisitService {
 
         return petCaseNum;
     }
+
+    public Integer countByVetName(String vetName) {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        visitRepository = new VisitRepositoryImpl(entityManager);
+
+        Integer visit_VetNameNum = visitRepository.countByVetName(vetName);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return visit_VetNameNum;
+    }
 }
