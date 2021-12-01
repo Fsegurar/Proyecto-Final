@@ -309,7 +309,7 @@
                     tr.appendChild(tdgato)
                     document.getElementById("body3-table").appendChild(tr);
                 })
-            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count/type')
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count')
                 .then(response => response.json())
                 .then(data =>{
                     console.log(data);
@@ -329,6 +329,13 @@
                     });
                     document.getElementById("body4-table").appendChild(tr);
                 })
+
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count/vet')
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data)
+                })
+
             let vets = [];
             let vists = [];
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/vets')
