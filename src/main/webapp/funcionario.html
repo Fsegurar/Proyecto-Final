@@ -407,6 +407,7 @@
         //Send message
         function send() {
             var content = document.getElementById("msg").value;
+            document.getElementById("msg").value = ""
             var json = JSON.stringify({
                 "content": content
             });

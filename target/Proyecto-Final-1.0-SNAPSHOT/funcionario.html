@@ -327,12 +327,10 @@
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count/vet')
                 .then(response => response.json())
                 .then(data =>{
-                    console.log(data)
                     let tr = document.createElement("tr");
                     let th = document.createElement("th");
                     let tr1 = document.createElement("tr");
                     Object.keys(data).forEach((key) =>{
-                        console.log(data[key])
                         th.innerHTML = key;
 
                         let td = document.createElement("td");
@@ -409,6 +407,7 @@
         //Send message
         function send() {
             var content = document.getElementById("msg").value;
+            document.getElementById("msg").value = ""
             var json = JSON.stringify({
                 "content": content
             });
