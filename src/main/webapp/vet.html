@@ -221,6 +221,7 @@
             document.cookie = "usename = ; expires = "+Date();
             window.location.href = location.href.replace("vet.html","");
         };
+        //if the type is microchip then  the field is enable
         document.getElementById("type-input").onclick = function() {
             let tipo = document.getElementById("type-input").value;
             if (tipo == "Implantacion_de_Microchip") {
@@ -230,6 +231,7 @@
                 document.getElementById("microchip-input").setAttribute("disabled", "disabled")
             }
         }
+        //charge table by the vet name
         document.getElementById("load-button").onclick = function ()  {
            document.getElementById("body-table").remove();
             let tbody= document.createElement("tbody");
@@ -263,7 +265,7 @@
                 })
             })
         }
-
+        //charge table by the pet name
         document.getElementById("load-name").onclick = function () {
             document.getElementById("body-table").remove();
             let tbody= document.createElement("tbody");
@@ -323,7 +325,7 @@
                 })
 
         }
-
+        //sending data to creat a visit
         const form = document.querySelector('form');
         form.addEventListener('submit',handleSubmit)
         function handleSubmit(event) {
