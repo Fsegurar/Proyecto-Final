@@ -88,7 +88,7 @@ public class VisitService {
                     visit.getCreated_at(),
                     visit.getType(),
                     visit.getDescription(),
-                    visit.getVet_id().getName(),
+                    null,
                     visit.getPet().getPet_id()
             ));
         }
