@@ -154,8 +154,12 @@
                 <label  class="mb-2 mr-sm-2"> Nombre de la Veterinaria:</label>
                 <input id="namevet2-input" type="text" class="form-control mb-2 mr-sm-2" placeholder="Nombre" name="nameVet"/>
                 <input id="load-button"  type="button"  class="btn btn-outline-success" value="Cargar tabla"/>
+                <br/>
+                <label  class="mb-2 mr-sm-2"> Nombre de la mascota:</label>
+                <input id="namepet-input" type="text" class="form-control mb-2 mr-sm-2" placeholder="Nombre" disabled="disabled" name="namepet"/>
+                <input id="load-name"  type="button"  class="btn btn-outline-success" disabled="disabled" value="Cargar tabla"/>
                 <div class="table-responsive ">
-                    <table class="table table-hover">
+                    <table id="table" class="table table-hover">
                         <thead class="thead-dark">
                         <tr>
                             <th class="column-header"># Visita</th>
@@ -227,7 +231,14 @@
             }
         }
         document.getElementById("load-button").onclick = function ()  {
+           document.getElementById("body-table").remove();
+            let tbody= document.createElement("tbody");
+            tbody.setAttribute("id","body-table");
+            document.getElementById("table").appendChild(tbody);
+            document.getElementById("namepet-input").removeAttribute("disabled");
+            document.getElementById("load-name").removeAttribute("disabled");
             let name = document.getElementById("namevet2-input").value;
+            document.cookie="name="+name;
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/visits/')
             .then(response => response.json())
             .then(data =>{
@@ -251,6 +262,66 @@
                     }
                 })
             })
+        }
+
+        document.getElementById("load-name").onclick = function () {
+            document.getElementById("body-table").remove();
+            let tbody= document.createElement("tbody");
+            tbody.setAttribute("id","body-table");
+            document.getElementById("table").appendChild(tbody);
+            let petname = document.getElementById("namepet-input").value;
+            let name;
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                if (cookies[i].includes("name")) {
+                    name = cookies[i].split("=")[1];
+                }
+            }
+
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/pets')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    data.forEach((pet) => {
+                        if (pet.name == petname) {
+                            document.cookie="pet_id="+pet.pet_id;
+                        }
+                    })
+                })
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/visits/')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    let id;
+                    const cookies = document.cookie.split(";");
+                    for (let i = 0; i < cookies.length; i++) {
+                        if (cookies[i].includes("pet_id")) {
+                            id = cookies[i].split("=")[1];
+                        }
+                    }
+                    data.forEach((visit) => {
+                        console.log(id+" / "+visit.pet_id)
+                        console.log(name+" / "+visit.vet_id)
+                        if (visit.vet_id == name && visit.pet_id==id) {
+                            let tr = document.createElement("tr")
+                            let visita = {
+                                numero : visit.visit_id,
+                                fecha : visit.created_at,
+                                tipo: visit.type,
+                                ds : visit.description,
+                                pet: visit.pet_id
+                            }
+                            Object.keys(visita).forEach((key) => {
+                                let td = document.createElement("td");
+                                td.innerHTML = visita[key];
+                                tr.appendChild(td);
+                            });
+                            document.getElementById("body-table").appendChild(tr);
+
+                        }
+                    })
+                })
+
         }
 
         const form = document.querySelector('form');
