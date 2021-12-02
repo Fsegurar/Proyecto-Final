@@ -83,7 +83,7 @@ public class UserAppResource {
             if(userapp.getOwner().getNeighborhood()!=null){
                 persistedOwner = Optional.of(new OwnerService().editNeighborhoodByUsername(username, userapp.getOwner().getNeighborhood()));
             }
-            persistedUser.get().setOwner(persistedOwner.get());
+            //persistedUser.get().setOwner(persistedOwner.get());
         }else if(userapp.getVet()!=null){
             Optional<VetPOJO> persistedVet=null;
             if(userapp.getVet().getName()!=null){
@@ -98,14 +98,7 @@ public class UserAppResource {
             persistedUser.get().setVet(persistedVet.get());
         }
 
-        if (persistedUser.isPresent()) {
-            return Response.status(Response.Status.OK)
-                    .entity(persistedUser.get())
-                    .build();
-        } else {
-            return Response.status(400)
-                    .build();
-        }
+        return Response.status(Response.Status.OK).build();
 
     }
 

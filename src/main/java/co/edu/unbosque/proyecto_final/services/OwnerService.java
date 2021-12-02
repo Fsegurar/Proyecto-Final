@@ -51,7 +51,7 @@ public class OwnerService {
         entityManagerFactory.close();
 
         Owner owner = findByUserName(username);
-        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUserapp().getUsername(),owner.getPerson_id(),owner.getName(),owner.getAddress(),owner.getNeighborhood());
+        OwnerPOJO ownerPOJO = new OwnerPOJO();
 
         return ownerPOJO;
     }
@@ -66,7 +66,7 @@ public class OwnerService {
         entityManagerFactory.close();
 
         Owner owner = findByUserName(username);
-        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUserapp().getUsername(),owner.getPerson_id(),owner.getName(),owner.getAddress(),owner.getNeighborhood());
+        OwnerPOJO ownerPOJO = new OwnerPOJO();
 
         return ownerPOJO;
 
