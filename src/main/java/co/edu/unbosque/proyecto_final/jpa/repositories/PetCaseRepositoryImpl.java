@@ -39,7 +39,7 @@ public class PetCaseRepositoryImpl implements PetCaseRepository{
     }
 
     @Override
-    public List<PetCase> findAll() {return entityManager.createQuery("from UserApp ").getResultList();
+    public List<PetCase> findAll() {return entityManager.createQuery("from PetCase ").getResultList();
     }
 
 

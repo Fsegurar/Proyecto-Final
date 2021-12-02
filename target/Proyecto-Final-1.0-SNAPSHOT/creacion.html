@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Conexión con Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" >
+    <title>Ciudadanos de 4 patas</title>
+</head>
+<body class="index">
+    <div class="text-center">
+        <h1>Ciudadanos de 4 patas
+            <img src="Img/wlcome.gif" width="90" height="90">
+        </h1>
+    </div>
+    <div class="container">
+        <div class="d-grid justify-content-center align-items-center" >
+            <div class="flotante2">
+                <div class="d-grid gap-1">
+                    <h4>Bienvenido a Ciudadano de 4 patas</h4>
+                    <p>Por favor diligencie los siguentes campos</p>
+                </div>
+                <form class="was-validated"  novalidate>
+                    <div class="form-group">
+                        <label  class="mb-2 mr-sm-2">Nombre de Usuario</label>
+                        <input id="username-input-crear" type="text" class="form-control mb-2 mr-sm-2" name="username"required/>
+                        <div class="valid-feedback">Validado.</div>
+                        <div id="username-error" class="invalid-feedback" >Por favor llene este campo.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-2 mr-sm-2">Contraseña:</label>
+                        <input id="pw-input-crear" type="password" class="form-control mb-2 mr-sm-2" name="password"required/>
+                        <div class="valid-feedback">Validado.</div>
+                        <div class="invalid-feedback">Por favor llene este campo.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-2 mr-sm-2">Validar Contraseña:</label>
+                        <input id="pw2-input-crear" type="password" class="form-control mb-2 mr-sm-2" name="password2"required/>
+                        <div class="valid-feedback">Validado.</div>
+                        <div id="psw1-error" class="invalid-feedback" >Por favor llene este campo.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-2 mr-sm-2">Email:</label>
+                        <input id="email-input-crear" type="email" class="form-control mb-2 mr-sm-2" name="email"required/>
+                        <div class="valid-feedback">Validado.</div>
+                        <div id="psw-error" class="invalid-feedback"> Por favor llene este campo.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-2 mr-sm-2">Role:</label>
+                        <select id="role-input-crear" name="role" required>
+                            <option></option>
+                            <option>owner</option>
+                            <option>vet</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-2 mr-sm-2">Nombre Propietario/ Nombre Veterinaria:</label>
+                        <input id="name-input-crear" type="text" class="form-control mb-2 mr-sm-2" name="name"required/>
+                        <div class="valid-feedback">Validado.</div>
+                        <div class="invalid-feedback">Por favor llene este campo.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-2 mr-sm-2">Direccion:</label>
+                        <input id="address-input-crear" type="text" class="form-control mb-2 mr-sm-2" name="address"required/>
+                        <div class="valid-feedback">Validado.</div>
+                        <div class="invalid-feedback">Por favor llene este campo.</div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="mb-2 mr-sm-2">Localidad:</label>
+                        <select id="neightbor-input-crear" name="neighborhood" required>
+                            <option></option>
+                            <option></option>
+                            <option>A_NARINO</option>
+                            <option>B_UNIDOS</option>
+                            <option>BOSA</option>
+                            <option>C_BOLIVAR</option>
+                            <option>CHAPINERO</option>
+                            <option>ENGATIVA</option>
+                            <option>FONTIBON</option>
+                            <option>KENNEDY</option>
+                            <option>LA_CANDELARIA</option>
+                            <option>LOS_MARTIRES</option>
+                            <option>P_ARANDA</option>
+                            <option>R_URIBE</option>
+                            <option>SAN_CRISTOBAL</option>
+                            <option>SANTA_FE</option>
+                            <option>SUBA</option>
+                            <option>SUMAPAZ</option>
+                            <option>TEUSAQUILLO</option>
+                            <option>TUNJUELITO</option>
+                            <option>USAQUEN</option>
+                            <option>USME</option>
+                        </select>
+                        <div class="valid-feedback">Validado.</div>
+                        <div class="invalid-feedback">Por favor llene este campo.</div>
+                    </div>
+                    <div>
+                        <input class="botons1" type="submit" value="Sing in"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit',handleSubmit)
+        function handleSubmit(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const value = Object.fromEntries(data.entries());
+            console.log({value})
+            let nickname = document.getElementById("username-input-crear").value;
+            let psw1 = document.getElementById("pw-input-crear").value;
+            let psw2 = document.getElementById("pw2-input-crear").value;
+            let email = document.getElementById("email-input-crear").value;
+            let name = document.getElementById("name-input-crear").value;
+            let role = document.getElementById("role-input-crear").value;
+            let address = document.getElementById("address-input-crear").value;
+            let localidad = document.getElementById("neightbor-input-crear").value;
+            var contador = 0;
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    data.forEach((user) => {
+                        if (nickname === user.username) {
+                            contador++;
+                            window.alert("EL ususario ya existe");
+                            event.stopPropagation();
+                        }
+                    })
+                })
+
+            if (psw1!=(psw2)) {
+                contador++;
+                window.alert("Las contraseñas no coinciden");
+                event.stopPropagation();
+            }
+            if (contador === 0) {
+                if (role === "vet") {
+                    let userapp = {
+                        username: nickname,
+                        password: psw1,
+                        email: email,
+                        role: role,
+                        vet: {
+                            name: name,
+                            address: address,
+                            neighborhood: localidad
+                        }
+                    }
+                    fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/user', {
+                        method: 'POST',
+                        body: JSON.stringify(userapp),
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8'
+                        }
+                    })
+                    window.location.href = location.href.replace("creacion.html","index.html");
+                } else if (role === "owner") {
+                    let userapp = {
+                        username: nickname,
+                        password: psw1,
+                        email: email,
+                        role: role,
+                        owner: {
+                            name: name,
+                            address: address,
+                            neighborhood: localidad
+                        }
+                    }
+                    fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/user', {
+                        method: 'POST',
+                        body: JSON.stringify(userapp),
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8'
+                        }
+                    })
+                    window.location.href = location.href.replace("creacion.html","index.html");
+                }
+            }else {
+                window.alert("No creado");
+                event.stopPropagation();
+            }
+        };
+
+    </script>
+</body>
+</html>

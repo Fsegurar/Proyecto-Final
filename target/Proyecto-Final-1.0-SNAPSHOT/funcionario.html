@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ciudadanos de 4 Patas</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" >
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+            * {box-sizing: border-box;}
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        .open-button {
+        background-color: #555;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        opacity: 0.8;
+        position: fixed;
+        bottom: 23px;
+        right: 28px;
+        width: 280px;
+        }
+
+        /* The popup chat - hidden by default */
+        .chat-popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+        }
+
+        /* Add styles to the form container */
+        .table-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
+        }
+
+        /* Full-width textarea */
+        .table-container textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+        resize: none;
+        min-height: 200px;
+        }
+
+        /* Full-width input */
+        .table-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+            resize: none;
+            min-height: 200px;
+        }
+
+
+        /* When the textarea gets focus, do something */
+        .table-container textarea:focus {
+        background-color: #ddd;
+        outline: none;
+        }
+
+        /* When the input gets focus, do something */
+        .table-container input:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Set a style for the submit/send button */
+        .table-container .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        opacity: 0.8;
+        }
+
+        /* Add a red background color to the cancel button */
+        .table-container .cancel {
+        background-color: red;
+        }
+
+        /* Add some hover effects to buttons */
+        .table-container .btn:hover, .open-button:hover {
+        opacity: 1;
+        }
+        </style>
+    </head>
+    <body class="Body">
+        <div class="contenedor text-center jumbotron" >
+                <h1>Ciudadano de 4 Patas</h1>
+        </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="col" style="padding-left: 100px">
+                <img  src="./Img/pata.png" style="margin-left:20px" width="75" height="75">
+                <a class="navbar-brand" style="margin-left:20px">Bienvenid@</a>
+            </div>
+            <div class="col" style="text-align: right; padding-right: 250px">
+                <button class="btn btn-secondary" id="logout-button">Logout</button>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="container" style="width: 593px;margin-right: 10px;margin-left: 70px;height: 350px;margin-top: 30px;padding-right: 0px;">
+                <div class="table-responsive tabla col-sm-6" style="/* margin:30px; */margin-right: 0px;width: 850px;">
+                    <h4>Propietarios</h4>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">A. NARINO</th>
+                            <th class="column-header">B. UNIDOS</th>
+                            <th class="column-header">BOSA</th>
+                            <th class="column-header">C. BOLIVAR</th>
+                            <th class="column-header">CHAPINERO</th>
+                            <th class="column-header">ENGATIVA</th>
+                            <th class="column-header">FONTIBON</th>
+                            <th class="column-header">KENNEDY</th>
+                            <th class="column-header">LA CANDELARIA</th>
+                            <th class="column-header">LOS MARTIRES</th>
+                            <th class="column-header">P. ARANDA</th>
+                            <th class="column-header">R. URIBE</th>
+                            <th class="column-header">SAN CRISTOBAL</th>
+                            <th class="column-header">SANTA FE</th>
+                            <th class="column-header">SUBA</th>
+                            <th class="column-header">SUMAPAZ</th>
+                            <th class="column-header">TEUSAQUILLO</th>
+                            <th class="column-header">TUNJUELITO</th>
+                            <th class="column-header">USAQUEN</th>
+                            <th class="column-header">USME</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body-table">
+                        </tbody>
+                    </table>
+                    <h4>Mascotas registradas</h4>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">Perros</th>
+                            <th class="column-header">Gatos</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body2-table">
+                        </tbody>
+                    </table>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">Perros con Microchip</th>
+                            <th class="column-header">Gatos con Microchip</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body3-table">
+                        </tbody>
+                    </table>
+                    <h4>Visitas Total</h4>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">Esterilizacion</th>
+                            <th class="column-header">Implantacion de Microchip</th>
+                            <th class="column-header">Vacunacion</th>
+                            <th class="column-header">Desparacitacion</th>
+                            <th class="column-header">Urgencia</th>
+                            <th class="column-header">Control</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body4-table">
+                        </tbody>
+                    </table>
+                    <h4>Visitas por Veterinaria</h4>
+                    <table class="table table-hover col-sm-6">
+                        <thead class="thead-dark col-sm-6">
+                        <tr>
+                            <th class="column-header">Veterinaria</th>
+                        </tr>
+                        </thead>
+                        <tbody id="body5-table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container col-sm-4" style="margin-top:30px;padding-left: 220px;">
+                <img id="dogimage" src="./Img/golden.jpg" class="rounded" alt="Cinque Terre" width="304" height="236">
+                <br/><br/>
+                <img id="catimage" src="./Img/gato.jpg" class="rounded" alt="Cinque Terre" width="304" height="236">
+            </div>
+        </div>
+        <div class="card-footer  bg-dark text-white" style="margin-top: 175px;">
+            <br/><br/>
+            <img src="./Img/logo-ub.png"  width="229" height="67">
+            <p>David Real, Felipe Segura</p>
+            <br/><br/>
+        </div>
+        <button class="open-button" onclick="openChat();">Chat</button>
+        <div class="chat-popup" id="myChat">
+            <table class="table-container">
+                <tr>
+                    <td>
+                        <h1>Chat</h1>
+                        <textarea readonly="true" rows="5" cols="10" id="log"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Message</b></label>
+                        <input placeholder="Type message.." id="msg" required></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="send();" class="btn">Send</button>
+                        <button type="button" class="btn cancel" onclick="closeChat();">Close</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <script>
+
+        (function () {
+
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/owner/count')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    let tr = document.createElement("tr")
+                    let localidades = {
+                        A_NARINO : data.A_NARINO,
+                        B_UNIDOS : data.B_UNIDOS,
+                        BOSA : data.BOSA,
+                        C_BOLIVAR : data.C_BOLIVAR,
+                        CHAPINERO : data.CHAPINERO,
+                        ENGATIVA : data.ENGATIVA,
+                        FONTIBON : data.FONTIBON,
+                        KENNEDY : data.KENNEDY,
+                        LA_CANDELARIA : data.LA_CANDELARIA,
+                        LOS_MARTIRES : data.LOS_MARTIRES,
+                        P_ARANDA : data.P_ARANDA,
+                        R_URIBE : data.R_URIBE,
+                        SAN_CRISTOBAL : data.SAN_CRISTOBAL,
+                        SANTA_FE : data.SANTA_FE,
+                        SUBA : data.SUBA,
+                        SUMAPAZ : data.SUMAPAZ,
+                        TEUSAQUILLO : data.TEUSAQUILLO,
+                        TUNJUELITO : data.TUNJUELITO,
+                        USAQUEN : data.USAQUEN,
+                        USME : data.USME
+                    }
+                    Object.keys(localidades).forEach((key) => {
+                        let td = document.createElement("td");
+                        td.innerHTML = localidades[key];
+                        tr.appendChild(td);
+                    });
+                    document.getElementById("body-table").appendChild(tr);
+
+                })
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/pets/count')
+            .then(response => response.json())
+            .then(data =>{
+                console.log(data)
+                let tr = document.createElement("tr");
+                let especies ={
+                    perro : data.Perro,
+                    gato : data.Gato
+                }
+                Object.keys(especies).forEach((key) => {
+                    let td = document.createElement("td");
+                    td.innerHTML = especies[key];
+                    tr.appendChild(td);
+                });
+                document.getElementById("body2-table").appendChild(tr);
+            })
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/pets')
+                .then(response => response.json())
+                .then(data =>{
+                    var perro =0;
+                    var gato =0;
+                    console.log(data)
+                    data.forEach((pet)=>{
+                        if(pet.species=="Perro" && pet.microchip!=null){
+                            perro++;
+                        } else if (pet.species=="Gato" && pet.microchip!=null){
+                            gato++;
+                        }
+
+                    })
+                    let tr = document.createElement("tr");
+                    let td = document.createElement("td");
+                    td.innerHTML = perro;
+                    tr.appendChild(td);
+                    let tdgato = document.createElement("td");
+                    tdgato.innerHTML=gato;
+                    tr.appendChild(tdgato)
+                    document.getElementById("body3-table").appendChild(tr);
+                })
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count')
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data);
+                    let tr = document.createElement("tr");
+                    let visitas ={
+                        Esterilizacion: data.Esterilizacion,
+                        chip : data.Implantacion_de_Microchip,
+                        Vacunacion : data.Vacunacion,
+                        Desparacitacion : data.Desparacitacion,
+                        Urgencia : data.Urgencia,
+                        Control : data.Control
+                    }
+                    Object.keys(visitas).forEach((key) => {
+                        let td = document.createElement("td");
+                        td.innerHTML = visitas[key];
+                        tr.appendChild(td);
+                    });
+                    document.getElementById("body4-table").appendChild(tr);
+                })
+
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/visits/count/vet')
+                .then(response => response.json())
+                .then(data =>{
+                    let tr = document.createElement("tr");
+                    let th = document.createElement("th");
+                    let tr1 = document.createElement("tr");
+                    Object.keys(data).forEach((key) =>{
+                        th.innerHTML = key;
+
+                        let td = document.createElement("td");
+                        td.innerHTML = data[key];
+                        tr.appendChild(th);
+                        tr1.appendChild(td);
+                    });
+                    document.getElementById("body5-table").appendChild(tr);
+                    document.getElementById("body5-table").appendChild(tr1);
+                })
+
+            let vets = [];
+            let vists = [];
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/vets')
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data);
+                    vets = data;
+                })
+            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/visits')
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data);
+                    vists = data;
+                })
+           /* for(var i =0;i<vets.length;i++){
+                let tr = document.createElement("tr");
+                if()
+
+            }*/
+
+        })();
+
+        //Checks if the login is done
+        if(document.cookie.length===0){
+            window.location.href = location.href.replace("funcionario.html","");
+        }
+
+        //Logout button to erase cookies
+        document.getElementById("logout-button").onclick = function (){
+            document.cookie = "Rol = ; expires = "+Date();
+            document.cookie = "username = ; expires = "+Date();
+            window.location.href = location.href.replace("funcionario.html","");
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2)
+                return parts.pop().split(';').shift();
+        }
+        //Chat Management
+        var ws;
+
+        //Open Chat
+        function openChat() {
+            document.getElementById("myChat").style.display = "block";
+
+            var username = getCookie("username");
+            var role = getCookie("Rol");
+
+            var host = document.location.host;
+            var pathname = document.location.pathname.split("/")[1];
+
+            ws = new WebSocket("ws://" + host +"/"+ pathname + "/chat/"+role+"/"+ username);
+
+            ws.onmessage = function(event) {
+                var log = document.getElementById("log");
+                console.log(event.data);
+                var message = JSON.parse(event.data);
+                log.innerHTML += message.from + " : " + message.content + "\n";
+            };
+        }
+        //Send message
+        function send() {
+            var content = document.getElementById("msg").value;
+            document.getElementById("msg").value = ""
+            var json = JSON.stringify({
+                "content": content
+            });
+
+            ws.send(json);
+        }
+        //Close chat
+        function closeChat() {
+            document.getElementById("myChat").style.display = "none";
+        }
+    </script>
+    </body>
+</html>
