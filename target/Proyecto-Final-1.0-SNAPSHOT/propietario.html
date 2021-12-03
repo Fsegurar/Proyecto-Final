@@ -386,7 +386,7 @@
             </table>
         </div>
     <script>
-
+        //send data to update owner
         document.getElementById("save-edit1").onclick = function (){
             let user;
             const cookies = document.cookie.split(";");
@@ -414,7 +414,7 @@
             case1.className="modal fade";
 
         }
-
+        //send dat to update a specific pet
         document.getElementById("save-edit2").onclick = function (){
             let pet_id = document.getElementById("id-edit").value;
             let pet_name = document.getElementById("petname-edit").value;
@@ -437,7 +437,7 @@
             case2.style.display = "none";
             case2.className="modal fade";
         }
-
+        //send data to creat a new case
         document.getElementById("save-edit3").onclick = function (){
             let owner;
             const cookies = document.cookie.split(";");
@@ -465,7 +465,7 @@
             case3.style.display = "none";
             case3.className="modal fade";
         }
-
+        //charging petcases table
         document.getElementById("case-table").onclick = function (){
             let pet_id = document.getElementById("id2-case").value;
             fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/petCases')
@@ -506,6 +506,7 @@
             document.cookie = "username = ; expires = "+Date();
             window.location.href = location.href.replace("propietario.html","");
         };
+        //charging  dogs breeds in the form
         fetch('https://dog.ceo/api/breeds/list/all')
             .then(response => response.json())
             .then(data => {
@@ -516,7 +517,7 @@
                     petBreed.appendChild(option);
                 });
             });
-
+        //charging cats breeds in the form
         fetch('https://api.thecatapi.com/v1/breeds')
             .then(response => response.json())
             .then(data => {
@@ -528,12 +529,12 @@
                     catBreed.appendChild(option);
                 });
             });
-
+        //modals
         const case1 = document.getElementById("case1");
         const case2 = document.getElementById("case2");
         const case3 = document.getElementById("case3");
         const case4 = document.getElementById("case4");
-
+        //charging pets table
         (function ()  {
             let user;
             const cookies = document.cookie.split(";");
@@ -634,10 +635,9 @@
 
                 })
         })();
-
+        //creat a new pet to this owner
         const form = document.querySelector('form');
         form.addEventListener('submit',handleSubmit)
-
         function handleSubmit(event) {
             event.preventDefault();
             const data = new FormData(event.target);
@@ -688,27 +688,24 @@
             })
             rowId++;
         }
-
+        //closing modals
         document.getElementById("close-edit1").onclick=function() {
             case1.style.display = "none";
             case1.className="modal fade";
         };
-
         document.getElementById("close-edit2").onclick=function() {
             case2.style.display = "none";
             case2.className="modal fade";
         };
-
         document.getElementById("close-edit3").onclick=function() {
             case3.style.display = "none";
             case3.className="modal fade";
         };
-
         document.getElementById("close-case").onclick=function() {
             case4.style.display = "none";
             case4.className="modal fade";
         };
-
+        //if the specie is dog or cat set the field enable
         document.getElementById("petspecies-input").onclick = function(){
             let raza =document.getElementById("petspecies-input").value;
             if(raza=="Perro"){
@@ -721,7 +718,7 @@
                 document.getElementById("dograza-input").setAttribute("disabled",true)
             }
         };
-
+        //open a modal
         let editar = document.getElementById("edit-button");
         editar.onclick  = function() {
             console.log("se leyo editar 1")
@@ -730,7 +727,7 @@
             case1.className="modal fade show";
 
         };
-
+        //open a modal
         let petcases = document.getElementById("case-button");
         petcases.onclick  = function() {
             console.log("se leyo editar 1")
@@ -742,6 +739,13 @@
 
         //Chat Management
         var ws;
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2)
+                return parts.pop().split(';').shift();
+        }
 
         //Open Chat
         function openChat() {

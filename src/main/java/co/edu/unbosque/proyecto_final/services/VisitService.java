@@ -96,7 +96,6 @@ public class VisitService {
     }
 
     public VisitPOJO saveVisit(String created_at, String type, String description, String vet_id, Integer pet_id){
-        if (type.equalsIgnoreCase("esterilización")||type.equalsIgnoreCase("esterilizacion")||type.equalsIgnoreCase("implantación de microchip")||type.equalsIgnoreCase("implantacion de microchip")||type.equalsIgnoreCase("vacunación")||type.equalsIgnoreCase("desparasitación")||type.equalsIgnoreCase("desparasitacion")||type.equalsIgnoreCase("urgencia ")||type.equalsIgnoreCase("control")) {
             EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
             EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -109,9 +108,7 @@ public class VisitService {
 
             VisitPOJO visitPOJO = new VisitPOJO(persistedVisit.get().getVisit_id(),created_at, type, description, persistedVisit.get().getPet(), persistedVisit.get().getVet_id());
             return visitPOJO;
-        }else {
-            return  null;
-        }
+
     }
 
     public Integer countByType(String type){

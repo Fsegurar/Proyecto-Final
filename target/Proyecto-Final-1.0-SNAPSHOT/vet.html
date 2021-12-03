@@ -221,6 +221,7 @@
             document.cookie = "usename = ; expires = "+Date();
             window.location.href = location.href.replace("vet.html","");
         };
+        //if the type is microchip then  the field is enable
         document.getElementById("type-input").onclick = function() {
             let tipo = document.getElementById("type-input").value;
             if (tipo == "Implantacion_de_Microchip") {
@@ -230,6 +231,7 @@
                 document.getElementById("microchip-input").setAttribute("disabled", "disabled")
             }
         }
+        //charge table by the vet name
         document.getElementById("load-button").onclick = function ()  {
            document.getElementById("body-table").remove();
             let tbody= document.createElement("tbody");
@@ -263,7 +265,7 @@
                 })
             })
         }
-
+        //charge table by the pet name
         document.getElementById("load-name").onclick = function () {
             document.getElementById("body-table").remove();
             let tbody= document.createElement("tbody");
@@ -323,7 +325,7 @@
                 })
 
         }
-
+        //sending data to creat a visit
         const form = document.querySelector('form');
         form.addEventListener('submit',handleSubmit)
         function handleSubmit(event) {
@@ -334,7 +336,6 @@
             let vet_name = document.getElementById("namevet-input").value;
             let id = document.getElementById("petId-input").value;
             let type = document.getElementById("type-input").value;
-            let date = Date();
             let description = document.getElementById("description-input").value;
             let mirch = document.getElementById("microchip-input").value;
 
@@ -346,7 +347,7 @@
                     console.log(data)
                     data.forEach((pet) => {
                         if(id==pet.pet_id){
-                            if(pet.microchip!=null){
+                            if(pet.microchip!=""){
                                 window.alert("La mascota ya tiene microchip")
                                 event.stopPropagation();
                             }
@@ -354,32 +355,52 @@
                     })
                 })
                  visit ={
-                    create_at : date,
+                    created_at : Date(),
                     type : type,
                     description :description,
-                     pet : {
+                    pet : {
                          microchip : mirch
                      }
                 }
+                Object.keys(visit).forEach((k) =>{
+                    console.log(k)
+                })
+                fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/'+vet_name+'/pets/'+id+'/visit', {
+                    method: 'POST',
+                    body: JSON.stringify(visit),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
+                })
             }else{
                  visit ={
-                    create_at : date,
+                    created_at : Date(),
                     type : type,
-                    description :description,
-
-                }
+                    description : description
+                 }
+                Object.keys(visit).forEach((k) =>{
+                    console.log(k)
+                })
+                console.log(JSON.stringify(visit))
+                fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/'+vet_name+'/pets/'+id+'/visit', {
+                    method: 'POST',
+                    body: JSON.stringify(visit),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
+                })
             }
 
-            fetch('http://localhost:8080/Proyecto-Final-1.0-SNAPSHOT/api/users/'+vet_name+'/pets/'+id+'/visit', {
-                method: 'POST',
-                body: JSON.stringify(visit),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
-                }
-            })
         }
         //Chat Management
         var ws;
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2)
+                return parts.pop().split(';').shift();
+        }
 
         //Open Chat
         function openChat() {
