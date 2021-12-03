@@ -8,5 +8,5 @@ La aplicación permite visualizar, acceder y manipular los datos de la campaña 
 Esta aplicación está conformada por un frontend (aplicación web), un backend (API Rest) y una base de datos (PostgreSQL).
 Soporta 3 tipos de usuarios: Funcionario, Dueño y Veterinaria. Tiene funcionalidades independientes por cada tipo de usuario, owner cuenta con actualización de usuario y mascota, tambíen permite crear casos como robo, pérdida y fallecimiento. Funcionario tiene una tabla de datos completos para consultar. Veterinaria tiene funciones de añadir visitas a la veterinaria y de consultar dichas visitas. Está disponible un chat entre el funcionario y dueño, y entre funcionario y veterinaria, para fines de soporte y orientación acerca de los beneficios del programa.
 <br/>
-Video del funcionamiento de los requerimientos: 
+Video del funcionamiento de los requerimientos: https://www.youtube.com/watch?v=O8Hjbhb3apY
 <br/>
